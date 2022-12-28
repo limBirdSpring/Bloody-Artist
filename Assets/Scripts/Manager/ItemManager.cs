@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ using UnityEngine.UI;
 public struct Item
 {
     public string name;
-    public Image image;
+    public Texture2D image;
     public string description;
     public int num;
 }
@@ -27,7 +28,12 @@ public class ItemManager : SingleTon<ItemManager>
 
 
     private Item curSetItem; //현재 장착 아이템
-    
+
+    private void Start()
+    {
+        curSetItem = items[0];//빈 아이템
+        inventoryItems.Add(items[0]);//조사는 기본 장착
+    }
 
     public void GetItem(string name)//아이템 획득
     {
@@ -89,6 +95,7 @@ public class ItemManager : SingleTon<ItemManager>
             if (inventoryItems[i].name == name)
             {
                 curSetItem = inventoryItems[i];
+                GameManager.instance.CursorChange(inventoryItems[i].image);
             }
         }
     }

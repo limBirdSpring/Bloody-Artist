@@ -34,7 +34,7 @@ public class BloodManager : SingleTon<BloodManager>
         //칼을 사용해 현재 색의 피를 흘리는 애니메이션
     }
 
-    public void DroppedZem()
+    public void DroppedGem()
     {
         //현재 피 색의 젬 떨어뜨림
     }
