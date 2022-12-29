@@ -8,6 +8,4 @@ public class Experience : ScriptableObject
 {
     public new string name;
     public string description;
-
-
 }

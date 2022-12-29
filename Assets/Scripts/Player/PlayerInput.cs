@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 변경, 아이템 장착해제
@@ -13,6 +14,9 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
 
     [SerializeField]
     private Transform mainCamera;
+
+    [SerializeField]
+    private Canvas InvenCanvas;
 
 
 
@@ -29,16 +33,16 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         {
             Cursor.lockState = CursorLockMode.None; //커서 락 해제
             Cursor.visible = true;
-            ResearchMode();
+            if (Input.GetMouseButtonDown(0))
+                ResearchMode();
         }
-        else
+        else if (!InvenCanvas.gameObject.activeSelf)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             PlayerRotate(); //좌우
             ViewRotate(); //위아래
         }
-
         //T키 : 아이템 장착해제
         if (Input.GetButtonDown("ItemSetRelease"))
             ItemSetRelease();
@@ -46,6 +50,11 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         //Esc키 : 설정
 
         //I키 : 인벤토리
+        if (Input.GetButtonDown("Inventory"))
+        {
+            Debug.Log("2");
+            CallInventory();
+        }
 
         //F1키 : 칼 사용 (칼 사용 시 다른 버튼 누르기 불가)
 
@@ -73,16 +82,27 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         //커서 레이캐스트
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 3))
+        if (Physics.Raycast(ray, out hit, 10))
         {
             //레이캐스트가 조사할 물건에 닿으면 진행해야하는 것
-            Debug.DrawRay(ray.origin, ray.direction, new Color(255,0,0,1), 3);
+            Debug.DrawRay(ray.origin, ray.direction*10, new Color(255,1,1,1), 1);
+            Debug.Log(hit.collider.gameObject.name);
+
+            InterActionAdapter inter = hit.collider.gameObject.GetComponent<InterActionAdapter>();
+            inter?.Interaction();
         }
     }
 
     private void ItemSetRelease()//아이템 장착 해제
     {
         ItemManager.instance.SetItem("조사");
+    }
+
+    private void CallInventory()
+    {
+        InvenCanvas.gameObject.SetActive(!InvenCanvas.gameObject.activeSelf);
+        Cursor.lockState = CursorLockMode.None; //커서 락 해제
+        Cursor.visible = true;
     }
 
 }

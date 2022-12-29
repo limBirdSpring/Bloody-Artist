@@ -3,13 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 [System.Serializable]
-public struct Item
+public struct ItemInfo
 {
     public string name;
     public Texture2D image;
@@ -22,12 +23,12 @@ public class ItemManager : SingleTon<ItemManager>
 {
     //아이템 종류 및 인벤토리 소지 아이템 관리
     [SerializeField]
-    private List<Item> items = new List<Item>(); 
+    private List<ItemInfo> items = new List<ItemInfo>(); 
 
-    private List<Item> inventoryItems = new List<Item>();
+    private List<ItemInfo> inventoryItems = new List<ItemInfo>();
 
 
-    private Item curSetItem; //현재 장착 아이템
+    private ItemInfo curSetItem; //현재 장착 아이템
 
     private void Start()
     {
@@ -41,7 +42,7 @@ public class ItemManager : SingleTon<ItemManager>
         {
             if (inventoryItems[i].name == name)//이미 가지고 있는 아이템이라면 개수변경
             {
-                Item item = inventoryItems[i];
+                ItemInfo item = inventoryItems[i];
                 item.num++;
                 inventoryItems[i] = item;
                 return;
@@ -58,13 +59,18 @@ public class ItemManager : SingleTon<ItemManager>
         }
     }
 
+    public void AddInventoryItemImage()
+    {
+        
+    }
+
     public void UsedItem(string name)//아이템 사용
     {
         for (int i = 0; i < inventoryItems.Count; i++)
         {
             if (inventoryItems[i].name == name)
             {
-                Item item = inventoryItems[i];
+                ItemInfo item = inventoryItems[i];
                 item.num--;
                 inventoryItems[i] = item;
 
