@@ -52,7 +52,6 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         //I키 : 인벤토리
         if (Input.GetButtonDown("Inventory"))
         {
-            Debug.Log("2");
             CallInventory();
         }
 
@@ -95,7 +94,7 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
 
     private void ItemSetRelease()//아이템 장착 해제
     {
-        ItemManager.instance.SetItem("조사");
+        ItemManager.instance.SetItem(0);
     }
 
     private void CallInventory()

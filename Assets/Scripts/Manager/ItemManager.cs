@@ -14,6 +14,7 @@ public struct ItemInfo
 {
     public string name;
     public Texture2D image;
+    public Sprite sprite;
     public string description;
     public int num;
 }
@@ -27,8 +28,11 @@ public class ItemManager : SingleTon<ItemManager>
 
     private List<ItemInfo> inventoryItems = new List<ItemInfo>();
 
+    [SerializeField]
+    private Image curSetitemImage;//현재 장착 아이템 이미지
 
-    private ItemInfo curSetItem; //현재 장착 아이템
+
+    public ItemInfo curSetItem; //현재 장착 아이템
 
     private void Start()
     {
@@ -57,11 +61,6 @@ public class ItemManager : SingleTon<ItemManager>
                 return;
             }
         }
-    }
-
-    public void AddInventoryItemImage()
-    {
-        
     }
 
     public void UsedItem(string name)//아이템 사용
@@ -94,15 +93,14 @@ public class ItemManager : SingleTon<ItemManager>
         return false;
     }
 
-    public void SetItem(string name)//인벤토리에서 선택한 아이템 장착
+    public void SetItem(int num)//인벤토리에서 선택한 아이템 장착
     {
-        for (int i = 0; i < inventoryItems.Count; i++)
+        Debug.Log("아이템장착");
+        if (inventoryItems[num].name !=null)
         {
-            if (inventoryItems[i].name == name)
-            {
-                curSetItem = inventoryItems[i];
-                GameManager.instance.CursorChange(inventoryItems[i].image);
-            }
+            curSetItem = inventoryItems[num];
+            GameManager.instance.CursorChange(inventoryItems[num].image);
+            curSetitemImage.sprite = ItemManager.Instance.curSetItem.sprite;
         }
     }
 
