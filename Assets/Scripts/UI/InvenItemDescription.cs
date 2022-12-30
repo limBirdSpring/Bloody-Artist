@@ -19,6 +19,6 @@ public class InvenItemDescription : MonoBehaviour
     public void ChangeItemText(int num)
     {
         itemName.text = ItemManager.Instance.inventoryItems[num].name;
-        description.text = ItemManager.Instance.inventoryItems[num].description;
+        TalkManager.Instance.TextFlow(description, ItemManager.Instance.inventoryItems[num].description);
     }
 }
