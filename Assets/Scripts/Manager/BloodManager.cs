@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,9 @@ public class BloodManager : SingleTon<BloodManager>
 
     [SerializeField]
     private Image bloodImage;
+
+    [SerializeField]
+    private TextMeshProUGUI hurtText;
 
     //---------------------------------------------------
 
@@ -115,6 +119,11 @@ public class BloodManager : SingleTon<BloodManager>
             bloodImage.gameObject.SetActive(false);
     }
 
+    private void UpdateHurtText()
+    {
+        hurtText.text = (int)(hurtSlide.fillAmount * 100) + "%";
+    }
+
     private IEnumerator SlideCoroutine(Image slide, float goal, bool add)
     {
         if (add)
@@ -123,6 +132,9 @@ public class BloodManager : SingleTon<BloodManager>
             {
                 yield return new WaitForSeconds(0.05f);
                 slide.fillAmount += 0.01f;
+
+                if (slide == hurtSlide)
+                    UpdateHurtText();
             }
         }
         else
@@ -131,6 +143,9 @@ public class BloodManager : SingleTon<BloodManager>
             {
                 yield return new WaitForSeconds(0.05f);
                 slide.fillAmount -= 0.01f;
+
+                if (slide == hurtSlide)
+                    UpdateHurtText();
             }
         }
     }
