@@ -95,6 +95,7 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
     private void ItemSetRelease()//아이템 장착 해제
     {
         ItemManager.instance.SetItem(0);
+        //조사마우스로 변경
     }
 
     private void CallInventory()

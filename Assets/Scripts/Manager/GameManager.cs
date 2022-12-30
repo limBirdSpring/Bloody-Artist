@@ -39,6 +39,15 @@ public class GameManager :  SingleTon<GameManager>
         Cursor.SetCursor(img, Vector2.zero, CursorMode.ForceSoftware);
     }
 
+    //현재 커서가 입력한 아이템 이름의 커서인가?
+    public bool IsCurCursor(string itemName)
+    {
+        if (itemName == ItemManager.Instance.curSetItem.name)
+            return true;
+        else
+            return false;
+    }
+
 
     //----------------------씬 관련------------------------
 

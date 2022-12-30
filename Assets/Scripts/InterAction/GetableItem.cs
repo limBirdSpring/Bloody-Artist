@@ -6,7 +6,10 @@ public class GetableItem : MonoBehaviour
 {
     public void GetItem()
     {
-        ItemManager.Instance.GetItem(gameObject.name);
-        Destroy(gameObject);
+        if (GameManager.Instance.IsCurCursor("조사"))//커서가 조사일때
+        {
+            ItemManager.Instance.GetItem(gameObject.name);
+            Destroy(gameObject);
+        }
     }
 }
