@@ -14,7 +14,8 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private Texture2D cursorImg;//Ä¿¼­ÀÌ¹ÌÁö
 
-
+    [SerializeField]
+    private Image bloodyScene;
 
     private void Start()
     {
@@ -44,6 +45,23 @@ public class GameManager :  SingleTon<GameManager>
 
 
     //----------------------¾À °ü·Ã------------------------
+
+    public void BloodyScene()
+    {
+        //´ÙÃÆÀ»¶§ È­¸é »¡°²°Ô ÇÏ±â
+        bloodyScene.gameObject.SetActive(true);
+
+        StartCoroutine(BloodySceneActive());
+    }
+
+    private IEnumerator  BloodySceneActive()
+    {
+        yield return new WaitForSeconds(0.15f);
+        bloodyScene.gameObject.SetActive(false);
+    }
+
+    
+
 
     public void GameOver()
     {

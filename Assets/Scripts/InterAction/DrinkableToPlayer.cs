@@ -14,7 +14,7 @@ public class DrinkableToPlayer : MonoBehaviour
         {
             Debug.Log("Ã¶ºÐÁ¦");
             ItemManager.Instance.UsedItem("FePill");
-            BloodManager.Instance.SubTired(10);
+            BloodManager.Instance.SubTired(30);
         }
     }
 }

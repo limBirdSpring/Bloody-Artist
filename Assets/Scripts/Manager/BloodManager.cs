@@ -20,13 +20,18 @@ public class BloodManager : SingleTon<BloodManager>
     //피에 관련된 것들 진행
 
     //상처율 : 100이 넘으면 게임오버
-    private int hurtPercent = 40;
+    private int hurtPercent = 20;
 
     [SerializeField]
     private Image hurtSlide;//상처율 슬라이드
 
+    [SerializeField]
+    private Image bloodImage;
+
+    //---------------------------------------------------
+
     //피로도 : 쌓일수록 시야가 흐려짐
-    private int tiredPercent = 100;
+    private int tiredPercent = 30;
 
     [SerializeField]
     private Image tiredSlide;//피로도 슬라이드
@@ -80,6 +85,7 @@ public class BloodManager : SingleTon<BloodManager>
     public void Hurt(int damage)
     {
         //게임화면 붉게 변함
+        GameManager.Instance.BloodyScene();
 
         hurtPercent = Mathf.Clamp(hurtPercent + damage, 0, 100);
 
@@ -89,20 +95,24 @@ public class BloodManager : SingleTon<BloodManager>
 
         StartCoroutine(SlideCoroutine(hurtSlide, goal, true));
 
-        if (hurtPercent <= 0)
+        if (hurtPercent >= 100)
             GameManager.Instance.GameOver();
+        else if (hurtPercent >= 70)
+            bloodImage.gameObject.SetActive(true);
 
     }
 
     public void Heal(int damage)
     {
-
+         
         hurtPercent = Mathf.Clamp(hurtPercent - damage, 0, 100);
 
         float goal = 0.01f * hurtPercent;
 
         StartCoroutine(SlideCoroutine(hurtSlide, goal, false));
 
+        if (hurtPercent < 70)
+            bloodImage.gameObject.SetActive(false);
     }
 
     private IEnumerator SlideCoroutine(Image slide, float goal, bool add)
