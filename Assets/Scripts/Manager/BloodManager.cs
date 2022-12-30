@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BloodColor
 {
@@ -18,8 +19,17 @@ public class BloodManager : SingleTon<BloodManager>
 {
     //피에 관련된 것들 진행
 
+    //상처율 : 100이 넘으면 게임오버
+    private int hurtPercent = 40;
+
+    [SerializeField]
+    private Image hurtSlide;//상처율 슬라이드
+
     //피로도 : 쌓일수록 시야가 흐려짐
-    private int tiredPercent = 0;
+    private int tiredPercent = 100;
+
+    [SerializeField]
+    private Image tiredSlide;//피로도 슬라이드
 
     [SerializeField]
     private int howMuchTired;
@@ -27,6 +37,8 @@ public class BloodManager : SingleTon<BloodManager>
     //현재 피 색
     [SerializeField]
     private BloodColor curBloodColor = BloodColor.Red; //get,set추가
+
+ 
 
 
     public void UsedKnife()
@@ -41,9 +53,76 @@ public class BloodManager : SingleTon<BloodManager>
 
     public void AddTired(int tired)//다쳤거나 칼로 피를 흘릴 때 피로도 증가
     {
-        tiredPercent += tired;
+        tiredPercent = Mathf.Clamp(tiredPercent + tired, 0, 100);
+        float goal = 0.01f * tiredPercent;
+
+        Debug.Log(tiredPercent);
+
+        StartCoroutine(SlideCoroutine(tiredSlide, goal, true));
+
 
         Blind();
+    }
+
+    public void SubTired(int tired)//철분제 먹고 피로도 감소
+    {
+        tiredPercent = Mathf.Clamp(tiredPercent-tired, 0, 100);
+        float goal = 0.01f * tiredPercent;
+
+        Debug.Log(tiredPercent);
+
+        StartCoroutine(SlideCoroutine(tiredSlide, goal, false));
+
+
+        Blind();
+    }
+
+    public void Hurt(int damage)
+    {
+        //게임화면 붉게 변함
+
+        hurtPercent = Mathf.Clamp(hurtPercent + damage, 0, 100);
+
+        float goal = 0.01f * hurtPercent;
+
+        Debug.Log(hurtPercent);
+
+        StartCoroutine(SlideCoroutine(hurtSlide, goal, true));
+
+        if (hurtPercent <= 0)
+            GameManager.Instance.GameOver();
+
+    }
+
+    public void Heal(int damage)
+    {
+
+        hurtPercent = Mathf.Clamp(hurtPercent - damage, 0, 100);
+
+        float goal = 0.01f * hurtPercent;
+
+        StartCoroutine(SlideCoroutine(hurtSlide, goal, false));
+
+    }
+
+    private IEnumerator SlideCoroutine(Image slide, float goal, bool add)
+    {
+        if (add)
+        {
+            while (goal > slide.fillAmount && slide.fillAmount <= 100)
+            {
+                yield return new WaitForSeconds(0.05f);
+                slide.fillAmount += 0.01f;
+            }
+        }
+        else
+        {
+            while (goal < slide.fillAmount && slide.fillAmount >= 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+                slide.fillAmount -= 0.01f;
+            }
+        }
     }
 
     private void Blind()

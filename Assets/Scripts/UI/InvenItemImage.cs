@@ -17,6 +17,7 @@ public class InvenItemImage : MonoBehaviour
 
     private void OnEnable()
     {
+        itemImgWindow.sprite = null;
         if (ItemManager.Instance.inventoryItems.Count >invenNum)
             itemImgWindow.sprite = ItemManager.Instance.inventoryItems[invenNum].sprite;
     }

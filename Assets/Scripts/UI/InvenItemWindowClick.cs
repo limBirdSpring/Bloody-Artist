@@ -15,14 +15,17 @@ public class InvenItemWindowClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Left)
+        if (ItemManager.Instance.inventoryItems.Count > num)
         {
-            //아이템 설명 출력
-            Textui.ChangeItemText(num);
-        }
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            ItemManager.Instance.SetItem(num);
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                //아이템 설명 출력
+                Textui.ChangeItemText(num);
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                ItemManager.Instance.SetItem(num);
+            }
         }
     }
 }

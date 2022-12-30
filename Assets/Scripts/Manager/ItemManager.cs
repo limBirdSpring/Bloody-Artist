@@ -82,7 +82,10 @@ public class ItemManager : SingleTon<ItemManager>
                 inventoryItems[i] = item;
 
                 if (inventoryItems[i].num == 0)//개수가 0개라면 인벤토리에서 지움
+                {
                     inventoryItems.RemoveAt(i);
+                    SetItem(0);
+                }
 
                 return;
             }
