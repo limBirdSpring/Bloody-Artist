@@ -36,7 +36,7 @@ public class GameManager :  SingleTon<GameManager>
 
     public void CursorChange(Texture2D img)
     {
-        Cursor.SetCursor(img, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.SetCursor(img, new Vector2((float)img.width*0.5f, (float)img.height*0.5f), CursorMode.ForceSoftware);
     }
 
     //현재 커서가 입력한 아이템 이름의 커서인가?
