@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aedad1815532874982e714a1e29506c, type: 3}
-  m_Name: Blue
+  m_Name: Black
   m_EditorClassIdentifier: 
-  name: Blue
-  colorSlide: {fileID: 21300000, guid: c55eb686d21657149a8f89dd46940d98, type: 3}
-  handTexture: {fileID: 0}
-  gem: {fileID: 3687761820300206271, guid: 7e7e1ec2f505540478021fc539b66478, type: 3}
+  name: Black
+  colorSlide: {fileID: 21300000, guid: 82a7f90ed9584d84ca0234692b9f860f, type: 3}
+  armMaterial: {fileID: 2100000, guid: 4ef5786caed466a4eb815a0ff9bdba00, type: 2}
+  gem: {fileID: 3687761820300206271, guid: a9cafe24be16e5344a05f9fa36b6eba2, type: 3}

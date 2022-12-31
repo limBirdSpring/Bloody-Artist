@@ -7,6 +7,6 @@ public class BloodColor : ScriptableObject
 {
     public string name;
     public Sprite colorSlide;
-    public Texture2D handTexture;
+    public Material armMaterial;
     public GameObject gem;
 }

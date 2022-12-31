@@ -43,9 +43,12 @@ public class BloodManager : SingleTon<BloodManager>
     [SerializeField]
     private BloodColor curBloodColor;
 
-    //팔 텍스처
+    //팔
     [SerializeField]
-    private Material handMaterial;
+    private GameObject armTex;
+
+    [SerializeField]
+    private GameObject arm;
 
     //젬을 생성하는 위치
     [SerializeField]
@@ -184,9 +187,19 @@ public class BloodManager : SingleTon<BloodManager>
 
     public void UsedKnife()
     {
+        GameManager.Instance.ChangeCamToFront();
         //칼을 사용해 현재 색의 피를 흘리는 애니메이션
+        arm.SetActive(true);
+        StartCoroutine(ActiveKnife());
+    }
 
+    private IEnumerator ActiveKnife()
+    {
+        yield return new WaitForSeconds(2.4f);
+        arm.SetActive(false);
+        AddTired(10);
         DroppedGem();
+        GameManager.Instance.ExitCamFromFront();
     }
 
     private void DroppedGem()
@@ -211,6 +224,6 @@ public class BloodManager : SingleTon<BloodManager>
         hurtSlide.sprite = curBloodColor.colorSlide;
 
         //팔 텍스처 색깔 변경
-        //handMaterial.SetTexture(curBloodColor.handTexture);
+        armTex.gameObject.GetComponent<SkinnedMeshRenderer>().material = curBloodColor.armMaterial;
     }
 }

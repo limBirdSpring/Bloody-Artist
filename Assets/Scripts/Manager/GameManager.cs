@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,25 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private Image bloodyScene;
 
+    [SerializeField]
+    private CinemachineVirtualCamera frontCam;
+
     private void Start()
     {
         Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);//기본 커서 이미지
+    }
+
+
+    //---------------------카메라 관련-----------------------
+
+    public void ChangeCamToFront()
+    {
+        frontCam.Priority = 20;
+    }
+
+    public void ExitCamFromFront()
+    {
+        frontCam.Priority = 1;
     }
 
 
@@ -60,7 +77,8 @@ public class GameManager :  SingleTon<GameManager>
         bloodyScene.gameObject.SetActive(false);
     }
 
-    
+   
+
 
 
     public void GameOver()

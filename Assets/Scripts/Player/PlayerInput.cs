@@ -56,6 +56,10 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         }
 
         //F1키 : 칼 사용 (칼 사용 시 다른 버튼 누르기 불가)
+        if (Input.GetButtonDown("UsedKnife"))
+        {
+            BloodManager.Instance.UsedKnife();
+        }
 
         //Q키 : 누르고 있으면 페인트볼 조준모드로 변경
     }
@@ -103,5 +107,6 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;
     }
+
 
 }

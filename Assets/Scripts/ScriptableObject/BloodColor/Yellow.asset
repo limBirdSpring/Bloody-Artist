@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aedad1815532874982e714a1e29506c, type: 3}
-  m_Name: Pink
+  m_Name: Yellow
   m_EditorClassIdentifier: 
-  name: Pink
-  colorSlide: {fileID: 21300000, guid: dffe90dc66e5e5b4ab084dda909e1035, type: 3}
-  handTexture: {fileID: 0}
-  gem: {fileID: 3687761820300206271, guid: c251a44079f1674498b293143a73dc25, type: 3}
+  name: Yellow
+  colorSlide: {fileID: 21300000, guid: 84aff2a3d483a724ca61033c01cff07d, type: 3}
+  armMaterial: {fileID: 2100000, guid: 325533ab35d1982458651aff83763c5f, type: 2}
+  gem: {fileID: 3687761820300206271, guid: a19c7a0c96f23b947b60bd68aca8412b, type: 3}
