@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aedad1815532874982e714a1e29506c, type: 3}
+  m_Name: Blue
+  m_EditorClassIdentifier: 
+  name: Blue
+  colorSlide: {fileID: 21300000, guid: c55eb686d21657149a8f89dd46940d98, type: 3}
+  handTexture: {fileID: 0}
+  gem: {fileID: 3687761820300206271, guid: 7e7e1ec2f505540478021fc539b66478, type: 3}

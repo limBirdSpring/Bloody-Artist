@@ -4,21 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BloodColor
-{
-    Red,
-    Green,
-    Blue,
-    White,
-    Pink,
-    Black,
-    Size
-
-}
 
 public class BloodManager : SingleTon<BloodManager>
 {
     //피에 관련된 것들 진행
+
+    //---------------------[상처율]-----------------------
 
     //상처율 : 100이 넘으면 게임오버
     private int hurtPercent = 20;
@@ -32,7 +23,7 @@ public class BloodManager : SingleTon<BloodManager>
     [SerializeField]
     private TextMeshProUGUI hurtText;
 
-    //---------------------------------------------------
+    //---------------------[피로도]-----------------------
 
     //피로도 : 쌓일수록 시야가 흐려짐
     private int tiredPercent = 30;
@@ -43,22 +34,37 @@ public class BloodManager : SingleTon<BloodManager>
     [SerializeField]
     private int howMuchTired;
 
+    //---------------------[피 색깔]----------------------
+
+    //피 색깔 모음
+    public List<BloodColor> bloodColor = new List<BloodColor>();
+
     //현재 피 색
     [SerializeField]
-    private BloodColor curBloodColor = BloodColor.Red; //get,set추가
+    private BloodColor curBloodColor;
 
- 
+    //팔 텍스처
+    [SerializeField]
+    private Material handMaterial;
+
+    //젬을 생성하는 위치
+    [SerializeField]
+    private Transform gemTrans;
 
 
-    public void UsedKnife()
+    //---------------------------------------------------
+
+
+    private void Start()
     {
-        //칼을 사용해 현재 색의 피를 흘리는 애니메이션
+        curBloodColor = bloodColor[0];
     }
 
-    public void DroppedGem()
-    {
-        //현재 피 색의 젬 떨어뜨림
-    }
+
+
+    //==========================================================
+    //                        피로도
+    //==========================================================
 
     public void AddTired(int tired)//다쳤거나 칼로 피를 흘릴 때 피로도 증가
     {
@@ -86,8 +92,23 @@ public class BloodManager : SingleTon<BloodManager>
         Blind();
     }
 
+    //시야가 흐려지는 효과
+    private void Blind()
+    {
+        //시야 흐려짐
+    }
+
+
+
+    //==========================================================
+    //                        상처율
+    //==========================================================
+
     public void Hurt(int damage)
     {
+        //피 색 변경
+        ChangeBloodColor("Red");
+
         //게임화면 붉게 변함
         GameManager.Instance.BloodyScene();
 
@@ -97,12 +118,17 @@ public class BloodManager : SingleTon<BloodManager>
 
         Debug.Log(hurtPercent);
 
+        //젬 떨어뜨림
+        DroppedGem();
+
         StartCoroutine(SlideCoroutine(hurtSlide, goal, true));
 
         if (hurtPercent >= 100)
             GameManager.Instance.GameOver();
         else if (hurtPercent >= 70)
             bloodImage.gameObject.SetActive(true);
+
+
 
     }
 
@@ -124,6 +150,8 @@ public class BloodManager : SingleTon<BloodManager>
         hurtText.text = (int)(hurtSlide.fillAmount * 100) + "%";
     }
 
+
+    //상처율,피로도 슬라이드에 대한 코루틴
     private IEnumerator SlideCoroutine(Image slide, float goal, bool add)
     {
         if (add)
@@ -150,8 +178,39 @@ public class BloodManager : SingleTon<BloodManager>
         }
     }
 
-    private void Blind()
+    //==========================================================
+    //                          피 관련
+    //==========================================================
+
+    public void UsedKnife()
     {
-        //시야 흐려짐
+        //칼을 사용해 현재 색의 피를 흘리는 애니메이션
+
+        DroppedGem();
+    }
+
+    private void DroppedGem()
+    {
+        //현재 피 색의 젬 떨어뜨림
+        Instantiate(curBloodColor.gem, gemTrans.position, gemTrans.rotation);
+
+    }
+
+    public void ChangeBloodColor(string color)
+    {
+        for (int i=0; i < bloodColor.Count; i++)
+        {
+            if (color == bloodColor[i].name)
+            {
+                curBloodColor = bloodColor[i];
+                break;
+            }
+        }
+
+        //상처율 슬라이드 색상 변경
+        hurtSlide.sprite = curBloodColor.colorSlide;
+
+        //팔 텍스처 색깔 변경
+        //handMaterial.SetTexture(curBloodColor.handTexture);
     }
 }
