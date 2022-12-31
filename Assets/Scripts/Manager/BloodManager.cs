@@ -34,6 +34,8 @@ public class BloodManager : SingleTon<BloodManager>
     [SerializeField]
     private int howMuchTired;
 
+
+
     //---------------------[피 색깔]----------------------
 
     //피 색깔 모음
@@ -71,34 +73,30 @@ public class BloodManager : SingleTon<BloodManager>
 
     public void AddTired(int tired)//다쳤거나 칼로 피를 흘릴 때 피로도 증가
     {
+       
         tiredPercent = Mathf.Clamp(tiredPercent + tired, 0, 100);
         float goal = 0.01f * tiredPercent;
+
+        GameManager.Instance.Blind(goal);
 
         Debug.Log(tiredPercent);
 
         StartCoroutine(SlideCoroutine(tiredSlide, goal, true));
 
-
-        Blind();
     }
 
     public void SubTired(int tired)//철분제 먹고 피로도 감소
     {
+
         tiredPercent = Mathf.Clamp(tiredPercent-tired, 0, 100);
         float goal = 0.01f * tiredPercent;
+
+        GameManager.Instance.Blind(goal);
 
         Debug.Log(tiredPercent);
 
         StartCoroutine(SlideCoroutine(tiredSlide, goal, false));
 
-
-        Blind();
-    }
-
-    //시야가 흐려지는 효과
-    private void Blind()
-    {
-        //시야 흐려짐
     }
 
 
@@ -116,6 +114,8 @@ public class BloodManager : SingleTon<BloodManager>
         GameManager.Instance.BloodyScene();
 
         hurtPercent = Mathf.Clamp(hurtPercent + damage, 0, 100);
+
+        AddTired(damage/2);
 
         float goal = 0.01f * hurtPercent;
 

@@ -9,7 +9,7 @@ public class Gem : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddTorque(new Vector3(Random.Range(1,5), Random.Range(1, 5), Random.Range(1, 5)), ForceMode.Impulse);
+        rb.AddTorque(new Vector3(Random.Range(2,5), Random.Range(2, 5), Random.Range(2, 5)), ForceMode.Impulse);
     }
 
 }

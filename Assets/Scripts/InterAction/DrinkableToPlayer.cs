@@ -8,7 +8,7 @@ public class DrinkableToPlayer : MonoBehaviour
     {
         Debug.Log(ItemManager.Instance.curSetItem.fileName);
 
-        BloodManager.Instance.Hurt(10);
+        //BloodManager.Instance.Hurt(10);
 
         if (GameManager.Instance.IsCurCursor("FePill"))//커서가 철분제일때
         {

@@ -19,6 +19,9 @@ public class GameManager :  SingleTon<GameManager>
     private Image bloodyScene;
 
     [SerializeField]
+    private Image tiredScreen;
+
+    [SerializeField]
     private CinemachineVirtualCamera frontCam;
 
     private void Start()
@@ -77,7 +80,35 @@ public class GameManager :  SingleTon<GameManager>
         bloodyScene.gameObject.SetActive(false);
     }
 
-   
+    public void Blind(float goal)
+    {
+        StartCoroutine(BlindCoroutine(goal));
+    }
+
+    private IEnumerator BlindCoroutine(float goal)
+    {
+        if (tiredScreen.color.a < goal)
+        {
+            for(float i= tiredScreen.color.a; i < goal ; i+=0.01f)
+            {
+                //증가
+                yield return new WaitForSeconds(0.1f);
+                Color color = new Color(255, 255, 255, i);
+                tiredScreen.color = color;
+            }
+        }
+        else
+        {
+            for (float i = tiredScreen.color.a; i > goal; i -= 0.01f)
+            {
+                //감소
+                yield return new WaitForSeconds(0.1f);
+                Color color = new Color(255, 255, 255, i);
+                tiredScreen.color = color;
+            }
+        }
+
+    }
 
 
 
