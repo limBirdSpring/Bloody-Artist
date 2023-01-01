@@ -108,7 +108,7 @@ public class BloodManager : SingleTon<BloodManager>
     public void Hurt(int damage)
     {
         //피 색 변경
-        ChangeBloodColor("Red");
+        ExpManager.Instance.SetExp("Red");
 
         //게임화면 붉게 변함
         GameManager.Instance.BloodyScene();
