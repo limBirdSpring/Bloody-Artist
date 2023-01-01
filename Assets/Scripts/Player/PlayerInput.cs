@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
         }
 
         //F1키 : 칼 사용 (칼 사용 시 다른 버튼 누르기 불가)
-        if (Input.GetButtonDown("UsedKnife"))
+        if (Input.GetButtonDown("UsedKnife") && InvenCanvas.gameObject.activeSelf == false)
         {
             if (ItemManager.Instance.FindItem("Knife"))
                 BloodManager.Instance.UsedKnife();

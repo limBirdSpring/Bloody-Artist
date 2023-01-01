@@ -187,10 +187,13 @@ public class BloodManager : SingleTon<BloodManager>
 
     public void UsedKnife()
     {
-        GameManager.Instance.ChangeCamToFront();
-        //칼을 사용해 현재 색의 피를 흘리는 애니메이션
-        arm.SetActive(true);
-        StartCoroutine(ActiveKnife());
+        if (arm.activeSelf == false)
+        {
+            GameManager.Instance.ChangeCamToFront();
+            //칼을 사용해 현재 색의 피를 흘리는 애니메이션
+            arm.SetActive(true);
+            StartCoroutine(ActiveKnife());
+        }
     }
 
     private IEnumerator ActiveKnife()
