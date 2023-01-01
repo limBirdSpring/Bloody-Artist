@@ -205,8 +205,8 @@ public class BloodManager : SingleTon<BloodManager>
     private void DroppedGem()
     {
         //ÇöÀç ÇÇ »öÀÇ Áª ¶³¾î¶ß¸²
-        Instantiate(curBloodColor.gem, gemTrans.position, gemTrans.rotation);
-
+        GameObject obj = Instantiate(curBloodColor.gem, gemTrans.position, gemTrans.rotation);
+        obj.name = curBloodColor.gem.name;
     }
 
     public void ChangeBloodColor(string color)

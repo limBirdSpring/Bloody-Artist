@@ -9,6 +9,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+//주의! 아이템 담는 List 절대 수정하지 않기
+
 [System.Serializable]
 public struct ItemInfo
 {

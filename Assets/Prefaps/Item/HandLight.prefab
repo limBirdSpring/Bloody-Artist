@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7680588354130881434}
   - component: {fileID: 7680588354130881433}
   - component: {fileID: 7680588354130881432}
+  - component: {fileID: 2530480343077222673}
   - component: {fileID: 7680588354130881415}
   - component: {fileID: 7680588354130881414}
   m_Layer: 7
@@ -138,6 +139,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2530480343077222673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680588354130881413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc43f54b3fa06342b93b4ef8a8f4854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light: {fileID: 0}
 --- !u!114 &7680588354130881415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +164,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60f0abf5fcd84146881a0d673db58d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnInterAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2530480343077222673}
+        m_TargetAssemblyTypeName: HandLightEvent, Assembly-CSharp
+        m_MethodName: HandlightOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &7680588354130881414
 BoxCollider:
   m_ObjectHideFlags: 0

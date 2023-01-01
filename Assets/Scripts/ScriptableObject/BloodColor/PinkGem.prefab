@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3687761820829458057}
   - component: {fileID: 3687761820829458056}
   - component: {fileID: 7226433201776456151}
+  - component: {fileID: -1594040579122785717}
+  - component: {fileID: 1697595444319933684}
   m_Layer: 0
   m_Name: PinkGem
   m_TagString: Untagged
@@ -128,3 +130,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984225971b1ad7c4285eeb7b179772d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1594040579122785717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3687761820300206271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ea2f8db1836844b94f513583ef56e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInterAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1697595444319933684}
+        m_TargetAssemblyTypeName: GetableItem, Assembly-CSharp
+        m_MethodName: GetItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1697595444319933684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3687761820300206271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60f0abf5fcd84146881a0d673db58d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInterAction:
+    m_PersistentCalls:
+      m_Calls: []

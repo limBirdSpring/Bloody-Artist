@@ -44,7 +44,7 @@ Material:
     - _IndexOfRefraction: 2.14
     - _ReflectionStrength: 1.72
     m_Colors:
-    - _Color: {r: 0.23584908, g: 0.041162338, b: 0.07234375, a: 1}
+    - _Color: {r: 0.4245283, g: 0.106132075, b: 0.13186109, a: 1}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001
 EditorExtensionImpl:
