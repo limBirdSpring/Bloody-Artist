@@ -12,6 +12,9 @@ public class PlayerControler : MonoBehaviour
     [SerializeField]
     private float gravity;
 
+    [SerializeField]
+    private FootStep footStep;
+
 
     private void Awake()
     {
@@ -30,6 +33,16 @@ public class PlayerControler : MonoBehaviour
         charCon.Move(transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime);
 
         charCon.Move(transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+
+        if (Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f)
+        {
+            footStep.repeatTime = 0.9f - moveSpeed*0.1f;
+            footStep.gameObject.SetActive(true);
+        }
+        else
+        {
+            footStep.gameObject.SetActive(false);
+        }
     }
 
     private void Gravity()

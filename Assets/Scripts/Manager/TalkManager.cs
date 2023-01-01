@@ -49,6 +49,7 @@ public class TalkManager : SingleTon<TalkManager>
     //획득 텍스트 출력
     public void RenderGetItemText(ItemInfo item)
     {
+        getTextUI.gameObject.SetActive(false);
         getTextUI.color = new Color(32, 32, 32, 1);
         getTextUI.text = "『" + item.name + "』" + " 아이템을 얻었다.";
         getTextUI.gameObject.SetActive(true);
@@ -56,6 +57,7 @@ public class TalkManager : SingleTon<TalkManager>
 
     public void RenderGetExpText(string colorName)
     {
+        getTextUI.gameObject.SetActive(false);
         string name = null;
         Color color = new Color(32, 32, 32, 1);
 
