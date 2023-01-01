@@ -11,6 +11,7 @@ public class ExpManager : SingleTon<ExpManager>
     public void AddExp(string expColor)
     {
         //È¹µæ ÅØ½ºÆ® Ãâ·Â
+        TalkManager.Instance.RenderGetExpText(expColor);
 
         for(int i=0; i<expUI.Count;i++)
         {

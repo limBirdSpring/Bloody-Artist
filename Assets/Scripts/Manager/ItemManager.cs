@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 
 //주의! 아이템 담는 List 절대 수정하지 않기
@@ -58,6 +59,7 @@ public class ItemManager : SingleTon<ItemManager>
                 ItemInfo item = inventoryItems[i];
                 item.num++;
                 inventoryItems[i] = item;
+                TalkManager.Instance.RenderGetItemText(inventoryItems[i]);
                 return;
             }
         }
@@ -68,6 +70,7 @@ public class ItemManager : SingleTon<ItemManager>
             if (items[i].fileName == fileName)
             {
                 inventoryItems.Add(items[i]);
+                TalkManager.Instance.RenderGetItemText(items[i]);
                 return;
             }
         }
