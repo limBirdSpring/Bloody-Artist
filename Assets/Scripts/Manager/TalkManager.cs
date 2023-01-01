@@ -117,7 +117,9 @@ public class TalkManager : SingleTon<TalkManager>
         }
         else if (!isTexting)
         {
-            talkCanvas.gameObject.SetActive(false);
+            talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
+            StartCoroutine(CanvasActive());
+
             curLogIndex = 0;
 
             //대화모드 해제
@@ -126,7 +128,11 @@ public class TalkManager : SingleTon<TalkManager>
 
     }
 
-
+    private IEnumerator CanvasActive()
+    {
+        yield return new WaitForSeconds(1f);
+        talkCanvas.gameObject.SetActive(false);
+    }
 
     //==========================================================
     //                 아이템/경험 얻기 텍스트

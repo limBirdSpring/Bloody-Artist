@@ -21,7 +21,7 @@ public class PlayerInput : SingleTon<PlayerInput> // 커서로 조종하는 조사모드와 
 
     public bool isTalking;
 
-    private AudioSource audio;
+    public AudioSource audio { get; set; }
 
     [SerializeField]
     private AudioClip loadScreenSFX;

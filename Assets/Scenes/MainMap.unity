@@ -4342,6 +4342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223519213}
+  - component: {fileID: 223519214}
   m_Layer: 5
   m_Name: DialogueObj
   m_TagString: Untagged
@@ -4371,6 +4372,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &223519214
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223519212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1027e01ed8132944a9755dffb23e1a06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &225161426
 GameObject:
   m_ObjectHideFlags: 0
@@ -6583,7 +6604,7 @@ RectTransform:
   m_GameObject: {fileID: 370296035}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9986806, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1363464361}
@@ -34764,6 +34785,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 515270534}
     m_Modifications:
+    - target: {fileID: 2530480343077222673, guid: 1c40ef22da489284cbb47bd94961b4dc, type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c7a4a380b0102c4f8ee3a2862e7f8e8, type: 3}
     - target: {fileID: 2530480343077222673, guid: 1c40ef22da489284cbb47bd94961b4dc, type: 3}
       propertyPath: light
       value: 
