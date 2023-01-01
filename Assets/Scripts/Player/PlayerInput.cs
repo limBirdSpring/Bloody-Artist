@@ -104,10 +104,25 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
 
     private void CallInventory()
     {
-        InvenCanvas.gameObject.SetActive(!InvenCanvas.gameObject.activeSelf);
-        Cursor.lockState = CursorLockMode.None; //커서 락 해제
-        Cursor.visible = true;
+        if (InvenCanvas.gameObject.activeSelf == false)
+        {
+            InvenCanvas.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None; //커서 락 해제
+            Cursor.visible = true;
+        }
+        else
+        {
+            InvenCanvas.GetComponent<AudioSource>().Play();
+            InvenCanvas.GetComponentInChildren<Animator>().SetTrigger("InvenClose");
+            StartCoroutine(InvenCoroutine());
+        }
     }
 
+    private IEnumerator InvenCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        InvenCanvas.gameObject.SetActive(false);
+    }
 
 }

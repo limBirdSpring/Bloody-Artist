@@ -12,6 +12,7 @@ public class DrinkableToPlayer : MonoBehaviour
 
         if (GameManager.Instance.IsCurCursor("FePill"))//커서가 철분제일때
         {
+            gameObject.GetComponent<AudioSource>().Play();
             Debug.Log("철분제");
             ItemManager.Instance.UsedItem("FePill");
             BloodManager.Instance.SubTired(30);
