@@ -1,9 +1,10 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 변경, 아이템 장착해제
+public class PlayerInput : SingleTon<PlayerInput> // 커서로 조종하는 조사모드와 시야모드 변경, 아이템 장착해제
 {
     private float mouseX;
     private float mouseY;
@@ -18,6 +19,20 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
     [SerializeField]
     private Canvas InvenCanvas;
 
+    public bool isTalking;
+
+    private AudioSource audio;
+
+    [SerializeField]
+    private AudioClip loadScreenSFX;
+
+    [SerializeField]
+    private AudioClip NextSFX;
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
 
     private void Start()
@@ -28,6 +43,19 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
 
     private void Update()
     {
+        //대화모드
+        if (isTalking)
+        {
+            Cursor.lockState = CursorLockMode.None; //커서 락 해제
+            Cursor.visible = true;
+            if (Input.GetMouseButtonDown(0))
+            {
+                TalkManager.Instance.Talk();
+            }
+            return;
+        }
+
+
         //Alt키 : 조사모드로 변경
         if (Input.GetButton("Research"))
         {
@@ -99,6 +127,8 @@ public class PlayerInput : MonoBehaviour // 커서로 조종하는 조사모드와 시야모드 
 
     private void ItemSetRelease()//아이템 장착 해제
     {
+        audio.clip = NextSFX;
+        audio.Play();
         ItemManager.Instance.SetItem(0);
     }
 

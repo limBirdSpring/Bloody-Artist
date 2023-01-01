@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,22 +8,62 @@ using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 using static UnityEditor.Progress;
 using Color = UnityEngine.Color;
+using Image = UnityEngine.UI.Image;
 
 public class TalkManager : SingleTon<TalkManager>
 {
+
+    //--------------------흐르는 텍스트 관련---------------------
     private bool isTexting;
     private Coroutine curCoroutine;
 
+    private string prevText;
+
+
+    //--------------------아이템 획득 텍스트---------------------
     [SerializeField]
     private TextMeshProUGUI getTextUI;
 
 
-    //흐르는 텍스트
+
+    //-------------------------대화 관련------------------------
+    [SerializeField]
+    private Canvas talkCanvas;
+
+    [SerializeField]
+    private TextMeshProUGUI nameText;
+
+    [SerializeField]
+    private TextMeshProUGUI dialogueText;
+
+    private int curLogIndex =0;
+
+    public Dialogue curDlog;
+
+    private AudioSource audio;
+
+    [SerializeField]
+    private AudioClip nextSFX;
+
+
+    private void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
+    //==========================================================
+    //                     흐르는 텍스트
+    //==========================================================
     public void TextFlow(TextMeshProUGUI textMeshpro, string text)
     {
-        if (!isTexting)
+
+
+        if (!isTexting || text!=prevText)
         {
+            if (curCoroutine !=null)
+                StopCoroutine(curCoroutine);
             textMeshpro.text = "";
+            prevText = text;
             curCoroutine = StartCoroutine(TextCoroutine(textMeshpro, text));
         }
         else
@@ -45,8 +86,52 @@ public class TalkManager : SingleTon<TalkManager>
         isTexting = false;
     }
 
+    //==========================================================
+    //                          대화
+    //==========================================================
 
-    //획득 텍스트 출력
+    public void Talk()
+    {
+
+        if (curDlog.dialogue.Count > curLogIndex)
+        {
+            if (!isTexting)
+            {
+                curLogIndex++;
+            }
+
+            if (talkCanvas.gameObject.activeSelf == false)
+            {
+                //대화창 보이게하기 + 효과음
+                talkCanvas.gameObject.SetActive(true);
+
+                //대화모드 (Player Input 설정)
+                PlayerInput.Instance.isTalking = true;
+            }
+
+            audio.clip = nextSFX;
+            audio.Play();
+            nameText.text = curDlog.dialogue[curLogIndex-1].name;
+            TextFlow(dialogueText, curDlog.dialogue[curLogIndex-1].log);
+
+        }
+        else if (!isTexting)
+        {
+            talkCanvas.gameObject.SetActive(false);
+            curLogIndex = 0;
+
+            //대화모드 해제
+            PlayerInput.Instance.isTalking = false;
+        }
+
+    }
+
+
+
+    //==========================================================
+    //                 아이템/경험 얻기 텍스트
+    //==========================================================
+
     public void RenderGetItemText(ItemInfo item)
     {
         getTextUI.gameObject.SetActive(false);
