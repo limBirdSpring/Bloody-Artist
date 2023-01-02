@@ -40,16 +40,19 @@ public class TalkManager : SingleTon<TalkManager>
 
     public Dialogue curDlog;
 
-    private AudioSource audio;
+
+    //-------------------------조사 관련------------------------
 
     [SerializeField]
-    private AudioClip nextSFX;
+    private GameObject rightUp;
+    [SerializeField]
+    private GameObject leftUp;
+    [SerializeField]
+    private GameObject rightDown;
+    [SerializeField]
+    private GameObject leftDown;
 
 
-    private void Awake()
-    {
-        audio = GetComponent<AudioSource>();
-    }
 
     //==========================================================
     //                     흐르는 텍스트
@@ -109,8 +112,8 @@ public class TalkManager : SingleTon<TalkManager>
                 PlayerInput.Instance.isTalking = true;
             }
 
-            audio.clip = nextSFX;
-            audio.Play();
+            SoundManager.Instance.UIAudioPlay(UISound.Next);
+        
             nameText.text = curDlog.dialogue[curLogIndex-1].name;
             TextFlow(dialogueText, curDlog.dialogue[curLogIndex-1].log);
 
@@ -127,6 +130,25 @@ public class TalkManager : SingleTon<TalkManager>
         }
 
     }
+
+
+    //==========================================================
+    //                          조사
+    //==========================================================
+
+
+    public void ResearchText(string text)
+    {
+        GameObject researchText = null;
+
+
+        //사분할 중 마우스 포지션을 받아, 해당 조사오브젝트를 출력함.
+        researchText.SetActive(true);
+        TextFlow(researchText.GetComponentInChildren<TextMeshProUGUI>(), text);
+
+    }
+
+
 
     private IEnumerator CanvasActive()
     {

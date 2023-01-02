@@ -6,6 +6,7 @@ using UnityEngine;
 public enum UISound
 {
     Inven,
+    Paper,
     ItemSet,
     Click,
     Next,
@@ -26,6 +27,9 @@ public class SoundManager : SingleTon<SoundManager>
     private AudioClip inven;
 
     [SerializeField]
+    private AudioClip paper;
+
+    [SerializeField]
     private AudioClip itemSet;
 
     [SerializeField]
@@ -39,6 +43,8 @@ public class SoundManager : SingleTon<SoundManager>
 
     [SerializeField]
     private AudioClip drink;
+
+
 
 
     private void Awake()
@@ -56,6 +62,9 @@ public class SoundManager : SingleTon<SoundManager>
                 break;
             case UISound.ItemSet:
                 uiAudio.clip = itemSet;
+                break;
+            case UISound.Paper:
+                uiAudio.clip = paper;
                 break;
             case UISound.Click:
                 uiAudio.clip = click;
