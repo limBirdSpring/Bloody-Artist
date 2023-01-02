@@ -10,6 +10,11 @@ public class Researchable : MonoBehaviour
 
     public void Research()
     {
-        TalkManager.Instance.ResearchText(text);
+
+        if(GameManager.Instance.IsCurCursor("Research"))//커서가 조사일때
+        {
+            TalkManager.Instance.researchText = text;
+            TalkManager.Instance.ShowResearchText();
+        }
     }
 }

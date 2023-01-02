@@ -1,14 +1,18 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class State_Block : State
+public class State_Researching : State
 {
     public override void Action()
     {
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            TalkManager.Instance.ExitResearchText();
+        }
+            
     }
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State_Research : MonoBehaviour, State
+public class State_Research : State
 {
-    public void Action()
+    public override void Action()
     {
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;

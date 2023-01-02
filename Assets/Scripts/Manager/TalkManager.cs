@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -17,7 +19,7 @@ public class TalkManager : SingleTon<TalkManager>
     private bool isTexting;
     private Coroutine curCoroutine;
 
-    private string prevText;
+    private string prevText = "";
 
 
     //--------------------아이템 획득 텍스트---------------------
@@ -52,6 +54,11 @@ public class TalkManager : SingleTon<TalkManager>
     [SerializeField]
     private GameObject leftDown;
 
+    private GameObject researchTMP;
+
+
+    public string researchText { get; set; }
+
 
 
     //==========================================================
@@ -59,8 +66,6 @@ public class TalkManager : SingleTon<TalkManager>
     //==========================================================
     public void TextFlow(TextMeshProUGUI textMeshpro, string text)
     {
-
-
         if (!isTexting || text!=prevText)
         {
             if (curCoroutine !=null)
@@ -108,8 +113,8 @@ public class TalkManager : SingleTon<TalkManager>
                 //대화창 보이게하기 + 효과음
                 talkCanvas.gameObject.SetActive(true);
 
-                //대화모드 (Player Input 설정)
-                PlayerInput.Instance.isTalking = true;
+                //대화모드
+                InputManager.Instance.ChangeState(StateName.Talking);
             }
 
             SoundManager.Instance.UIAudioPlay(UISound.Next);
@@ -126,9 +131,16 @@ public class TalkManager : SingleTon<TalkManager>
             curLogIndex = 0;
 
             //대화모드 해제
-            PlayerInput.Instance.isTalking = false;
+            InputManager.Instance.ChangeState(StateName.Idle);
         }
 
+
+    }
+
+    private IEnumerator CanvasActive()
+    {
+        yield return new WaitForSeconds(1f);
+        talkCanvas.gameObject.SetActive(false);
     }
 
 
@@ -137,24 +149,52 @@ public class TalkManager : SingleTon<TalkManager>
     //==========================================================
 
 
-    public void ResearchText(string text)
+    public void ShowResearchText()
     {
-        GameObject researchText = null;
+        Vector2 mousePos = Input.mousePosition;
 
+        Vector2 windowMiddle = new Vector2(Screen.width *0.5f, Screen.height * 0.5f);
+
+        if (mousePos.x < windowMiddle.x && mousePos.y > windowMiddle.y)//1분할
+        {
+            researchTMP = leftUp;
+        }
+        else if (mousePos.x > windowMiddle.x && mousePos.y > windowMiddle.y)
+        {
+            researchTMP = rightUp;
+        }
+        else if (mousePos.x < windowMiddle.x && mousePos.y < windowMiddle.y)
+        {
+            researchTMP = leftDown;
+        }
+        else if (mousePos.x > windowMiddle.x && mousePos.y < windowMiddle.y)
+        {
+            researchTMP = rightDown;
+        }
+        else
+        {
+            researchTMP = leftUp;
+        }
+
+        researchTMP.transform.position = mousePos;//해당 마우스 위치로 변경
+
+        InputManager.Instance.ChangeState(StateName.Researching);
 
         //사분할 중 마우스 포지션을 받아, 해당 조사오브젝트를 출력함.
-        researchText.SetActive(true);
-        TextFlow(researchText.GetComponentInChildren<TextMeshProUGUI>(), text);
-
+        researchTMP.SetActive(true);
+        TextFlow(researchTMP.GetComponentInChildren<TextMeshProUGUI>(), researchText);
     }
 
-
-
-    private IEnumerator CanvasActive()
+    public void ExitResearchText()
     {
-        yield return new WaitForSeconds(1f);
-        talkCanvas.gameObject.SetActive(false);
+        if (!isTexting)
+        {
+            researchTMP.SetActive(false);
+            InputManager.Instance.ChangeState(StateName.Idle);
+        }
     }
+
+
 
     //==========================================================
     //                 아이템/경험 얻기 텍스트

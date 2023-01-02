@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State_Inventory : MonoBehaviour, State
+public class State_Inventory : State
 {
     [SerializeField]
     private Canvas InvenCanvas;
 
-    public void Action()
+    public override void Action()
     {
         CallInventory();
 
@@ -16,27 +16,30 @@ public class State_Inventory : MonoBehaviour, State
             SoundManager.Instance.UIAudioPlay(UISound.Next);
             ItemManager.Instance.SetItem(0);
         }
+
+        if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Cancel"))//인벤토리
+        {
+            ExitInventory();
+        }
     }
 
     private void CallInventory()
     {
-        if (Input.GetButtonDown("Inventory"))//인벤토리
-        {
-            InvenCanvas.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None; //커서 락 해제
-            Cursor.visible = true;
-        }
-        else if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Escape"))//인벤토리
-        {
-            InvenCanvas.GetComponent<AudioSource>().Play();
-            InvenCanvas.GetComponentInChildren<Animator>().SetTrigger("InvenClose");
-            StartCoroutine(InvenCoroutine());
-        }
+        InvenCanvas.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None; //커서 락 해제
+        Cursor.visible = true;
+    }
+
+    private void ExitInventory()
+    {
+        InvenCanvas.GetComponent<AudioSource>().Play();
+        InvenCanvas.GetComponentInChildren<Animator>().SetTrigger("InvenClose");
+        StartCoroutine(InvenCoroutine());
     }
 
     private IEnumerator InvenCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
 
         InvenCanvas.gameObject.SetActive(false);
         InputManager.Instance.ChangeState(StateName.Idle);

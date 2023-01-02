@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class State_Idle : MonoBehaviour, State
+public class State_Idle : State
 {
     //LookAt
 
@@ -38,7 +38,7 @@ public class State_Idle : MonoBehaviour, State
 
 
 
-    public void Action()
+    public override void Action()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -50,11 +50,15 @@ public class State_Idle : MonoBehaviour, State
 
 
         if (Input.GetButton("Research"))//조사
+        {
+            footStep.gameObject.SetActive(false);
             InputManager.Instance.ChangeState(StateName.Research);
-
+        }
         if (Input.GetButtonDown("Inventory"))//인벤토리
+        {
+            footStep.gameObject.SetActive(false);
             InputManager.Instance.ChangeState(StateName.Inventory);
-
+        }
         if (Input.GetButtonDown("ItemSetRelease"))//아이템 장착해제
         {
             SoundManager.Instance.UIAudioPlay(UISound.Next);

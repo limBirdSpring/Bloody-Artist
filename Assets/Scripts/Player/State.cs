@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface State
+
+public class State : MonoBehaviour
 {
-    void Action();
+    public virtual void Action() { }
 }

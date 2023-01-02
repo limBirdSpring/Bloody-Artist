@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State_Talking : MonoBehaviour, State
+public class State_Talking : State
 {
-    public void Action()
+    public override void Action()
     {
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;

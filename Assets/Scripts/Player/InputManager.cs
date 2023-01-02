@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ public enum StateName
 {
     Idle,
     Research,
+    Researching,
     Talking,
     Inventory,
     Horror,
@@ -16,16 +18,19 @@ public enum StateName
     Size,
 }
 
+[Serializable]
 public struct StateMachine
 {
     public StateName stateName;
+
+
     public State state;
 }
 
 public class InputManager : SingleTon<InputManager>
 {
     [SerializeField]
-    private List<StateMachine> allState = new List<StateMachine>();
+    public List<StateMachine> allState = new List<StateMachine>();
 
     private State curState;
 

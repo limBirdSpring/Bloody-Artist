@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State_Horror : MonoBehaviour, State
+public class State_Horror : State
 {
-    public void Action()
+    public override void Action()
     {
 
     }
