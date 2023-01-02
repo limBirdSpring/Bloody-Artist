@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartDoor : MonoBehaviour
+public class DoorOpenable : MonoBehaviour
 {
-    Animator anim;
+    private Animator anim;
+
+    [SerializeField]
+    private string usedItemName;
 
     private void Awake()
     {
@@ -13,9 +16,10 @@ public class StartDoor : MonoBehaviour
 
     public void Open()
     {
-        if (ItemManager.Instance.curSetItem.fileName == "Knife")
+        if (ItemManager.Instance.curSetItem.fileName == usedItemName)
         {
-            GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>()?.Play();
+            
             anim.SetTrigger("Open");
         }
     }

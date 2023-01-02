@@ -13,8 +13,8 @@ public class HandLightEvent : MonoBehaviour
     public void HandlightOn()
     {
         light.intensity = 1.92f;
-        PlayerInput.Instance.audio.clip = clip;
-        PlayerInput.Instance.audio.Play();
+       // SoundManager.Instance.audio.clip = clip;
+       // PlayerInput.Instance.audio.Play();
     }
 
 }

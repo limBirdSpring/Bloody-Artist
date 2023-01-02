@@ -15,6 +15,5 @@ public class Researchable : MonoBehaviour
         {
             TalkManager.Instance.researchText = text;
             TalkManager.Instance.ShowResearchText();
-        }
-    }
+        }    }
 }

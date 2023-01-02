@@ -13,8 +13,11 @@ public class Switchable : MonoBehaviour
 
     public void SwitchOnOff()
     {
-        GetComponent<AudioSource>().Play();
-        anim.SetBool("IsOn", !anim.GetBool("IsOn"));
+        if (GameManager.Instance.IsCurCursor("Research"))//커서가 조사일때
+        {
+            GetComponent<AudioSource>()?.Play();
+            anim.SetBool("IsOn", !anim.GetBool("IsOn"));
+        }
     }
 
 }

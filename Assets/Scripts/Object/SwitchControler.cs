@@ -38,24 +38,29 @@ public class SwitchControler : MonoBehaviour
 
         if (maskSwitch.GetBool("IsOn"))
         {
-            hallDoor.gameObject.GetComponent<AudioSource>().Play();
+            maskDoor.gameObject.GetComponent<AudioSource>().Play();
             maskDoor.SetBool("IsOpen", true);
+
+            hallSwitch.SetBool("IsOn", false);
+
         }
         else if (!maskSwitch.GetBool("IsOn"))
         {
 
-            hallDoor.gameObject.GetComponent<AudioSource>().Play();
+            maskDoor.gameObject.GetComponent<AudioSource>().Play();
             maskDoor.SetBool("IsOpen", false);
         }
 
         if (mediaSwitch.GetBool("IsOn"))
         {
-            hallDoor.gameObject.GetComponent<AudioSource>().Play();
+            mediaDoor.gameObject.GetComponent<AudioSource>().Play();
             mediaDoor.SetBool("IsOpen", true);
+
+            hallSwitch.SetBool("IsOn", false);
         }
         else if (!mediaSwitch.GetBool("IsOn"))
         {
-            hallDoor.gameObject.GetComponent<AudioSource>().Play();
+            mediaDoor.gameObject.GetComponent<AudioSource>().Play();
             mediaDoor.SetBool("IsOpen", false);
         }
     }
