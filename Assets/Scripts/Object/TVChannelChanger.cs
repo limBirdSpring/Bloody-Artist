@@ -21,6 +21,9 @@ public class TVChannelChanger : MonoBehaviour
     [SerializeField]
     public Material art;
 
+    [SerializeField]
+    public Material error;
+
 
 
     private void Awake()
@@ -29,31 +32,44 @@ public class TVChannelChanger : MonoBehaviour
         mash = GetComponent<MeshRenderer>();
     }
 
+    private void Update()
+    {
+        if (curChannel == 5)
+        {
+            mash.material = error;
+            return;
+        }
+    }
+
     public void ChangeChannel()
     {
-        GetComponent<AudioSource>().Play();
-
-        if (curChannel < 3)
-            curChannel++;
-        else
-            curChannel = 0;
-
-        Debug.Log(curChannel);
-
-        switch (curChannel)
+        //리모콘이 있을 때
+        if (GameManager.Instance.IsCurCursor("RemotCon") && curChannel < 4)//커서가 리모콘일때
         {
-            case 0:
-                mash.material = idol;
-                break;
-            case 1:
-                mash.material = game;
-                break;
-            case 2:
-                mash.material = toon;
-                break;
-            case 3:
-                mash.material = art;
-                break;
+            GetComponent<AudioSource>().Play();
+
+            if (curChannel < 3)
+                curChannel++;
+            else
+                curChannel = 0;
+
+            Debug.Log(curChannel);
+
+            switch (curChannel)
+            {
+                case 0:
+                    mash.material = idol;
+                    break;
+                case 1:
+                    mash.material = game;
+                    break;
+                case 2:
+                    mash.material = toon;
+                    break;
+                case 3:
+                    mash.material = art;
+                    break;
+            }
         }
     }
 }

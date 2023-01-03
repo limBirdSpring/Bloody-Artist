@@ -48,7 +48,11 @@ public class State_Idle : State
         Move();
         Gravity();
 
-
+        if (Input.GetButton("PaintBall"))//조사
+        {
+            footStep.gameObject.SetActive(false);
+            InputManager.Instance.ChangeState(StateName.PaintBall);
+        }
         if (Input.GetButton("Research"))//조사
         {
             footStep.gameObject.SetActive(false);

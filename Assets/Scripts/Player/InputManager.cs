@@ -14,6 +14,7 @@ public enum StateName
     Talking,
     Inventory,
     Horror,
+    PaintBall,
     Block,
     Size,
 }

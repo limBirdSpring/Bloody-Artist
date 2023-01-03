@@ -112,11 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedfa2a9a2421f14aafac18f8e9f7369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curChannel: 0
+  curChannel: 3
   idol: {fileID: 2100000, guid: 26af6432773eb0143add8313728a09a9, type: 2}
   game: {fileID: 2100000, guid: ecea7b304a583ac4fa6cc09624a60f20, type: 2}
-  art: {fileID: 2100000, guid: c03a4620d1396904689d1f3d75bef580, type: 2}
   toon: {fileID: 2100000, guid: bdb1cbcbcd35d7840bec5d68eaa345a6, type: 2}
+  art: {fileID: 2100000, guid: c03a4620d1396904689d1f3d75bef580, type: 2}
+  error: {fileID: 2100000, guid: 0f1714009031b4045b53ae84f1b02023, type: 2}
 --- !u!114 &825911517
 MonoBehaviour:
   m_ObjectHideFlags: 0

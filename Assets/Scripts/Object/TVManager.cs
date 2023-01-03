@@ -32,6 +32,8 @@ public class TVManager : SingleTon<TVManager>
 
     private int curImage = 0;
 
+    private Coroutine coroutine;
+
     private void Awake()
     {
         mash = GetComponent<MeshRenderer>();    
@@ -55,24 +57,37 @@ public class TVManager : SingleTon<TVManager>
             {
                 break;
             }
-            else
-            {
-                continue;
-            }
 
-            if (i == channelList.Count - 1)
+            if (i == channelList.Count - 2)
             {
                 if (curImage == channelList[i].curChannel)
                 {
                     //모든 화면 바뀌고 자물쇠 열림
+                    OpenCavinet();
                 }
             }
         }
     }
 
+    private void OpenCavinet()
+    {
+        //에러소리 재생
+
+        StopCoroutine(coroutine);
+
+        for(int i=0;i<channelList.Count;i++)
+        {
+            channelList[i].curChannel = 5;
+            
+        }
+
+        mash.material = error;
+
+    }
+
     private void ChangeChannel()
     {
-        StartCoroutine(Changer());
+        coroutine = StartCoroutine(Changer());
 
     }
 
@@ -110,6 +125,7 @@ public class TVManager : SingleTon<TVManager>
 
     public void ChangeTV()
     {
+        normalTV.GetComponentInChildren<TVChannelChanger>().curChannel = 3;
         normalTV.SetActive(true);
         dangerTV.SetActive(false);
     }
