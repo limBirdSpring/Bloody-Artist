@@ -8,6 +8,7 @@ public struct Log
 {
     public string name;
     public string log;
+    public bool select;
 }
 
 [CreateAssetMenu(fileName = "dlog", menuName = "Dialogue")]

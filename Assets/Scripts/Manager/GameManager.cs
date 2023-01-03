@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class GameManager :  SingleTon<GameManager>
 {
-    
 
     private bool isRunMode;//런모드 변경 (get,set)
 

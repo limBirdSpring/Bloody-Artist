@@ -12,12 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15794f680b7e2f64cb1b98b5e00443f7, type: 3}
   m_Name: GrandPa
   m_EditorClassIdentifier: 
+  questNum: 0
   dialogue:
   - name: "\uB178\uC778"
-    log: "\uC790\uB124. \uC774\uB9AC \uC640\uBCF4\uAC8C."
+    log: "\uC774 \uB299\uC740\uC774\uC5D0\uAC8C \uC640\uC918\uC11C \uACE0\uB9D9\uB124."
+    select: 0
   - name: "\uB178\uC778"
-    log: "\uB0B4 \uB9D0 \uC880 \uB4E4\uC5B4\uBCF4\uAC8C\uB098."
+    log: "\uC8FD\uAE30 \uC804\uC5D0 \uC0AC\uB78C\uACFC \uB300\uD654\uB97C \uB098\uB220\uBCF4\uACE0
+      \uC2F6\uC5C8\uB2E4\uB124."
+    select: 0
   - name: "\uB178\uC778"
-    log: "\uC2E0\uC774 \uD654\uB098\uBA74 \uBB54\uC9C0 \uC544\uB098?"
+    log: "\uBCF4\uC774\uB2E4\uC2F6\uC774, \uB09C \uC774\uC81C \uC0B4 \uB0A0\uC774
+      \uC5BC\uB9C8 \uB0A8\uC9C0 \uC54A\uC558\uB2E4\uB124."
+    select: 0
   - name: "\uB178\uC778"
-    log: "\uC2E0\uBC1C\uB048\uC774\uB77C\uB124. \uD558\uD558\uD558\uD558"
+    log: "\uADF8 \uC804\uC5D0 \uC18C\uC6D0\uC774 \uD558\uB098 \uC788\uB124."
+    select: 0
+  - name: "\uB178\uC778"
+    log: "\uC8FD\uAE30 \uC804\uC5D0 \uB098\uB97C \uC62D\uC544\uB9E8 \uC774 \uBC27\uC904\uC744
+      \uD480\uACE0\uC2F6\uB124."
+    select: 0
+  - name: "\uB178\uC778"
+    log: "\uADF8\uB798\uC57C.. \uD3B8\uD558\uAC8C \uB208\uC744 \uAC10\uC744 \uC218
+      \uC788\uC744 \uAC83 \uAC19\uC544."
+    select: 0
+  - name: "\uB178\uC778"
+    log: "\uB098\uB97C \uB3C4\uC640\uC8FC\uACA0\uB098?"
+    select: 0
+  - name: 
+    log: "(\uB178\uC778\uC744 \uB3C4\uC640\uC900\uB2E4.)"
+    select: 1

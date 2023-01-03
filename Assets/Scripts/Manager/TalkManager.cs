@@ -38,7 +38,12 @@ public class TalkManager : SingleTon<TalkManager>
     [SerializeField]
     private TextMeshProUGUI dialogueText;
 
-    private int curLogIndex =0;
+
+    [SerializeField]
+    private Button select;
+
+
+    public int curLogIndex { get; set; } = -1;
 
     public Dialogue curDlog;
 
@@ -103,6 +108,17 @@ public class TalkManager : SingleTon<TalkManager>
 
         if (curDlog.dialogue.Count > curLogIndex)
         {
+            if (select.gameObject.activeSelf == true && curDlog.dialogue[curLogIndex + 1].select == false)
+            {
+
+            }
+            else if (curLogIndex>=0&& curDlog.dialogue[curLogIndex+1].select == true)
+            {
+                select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[curLogIndex+1].log;
+                select.gameObject.SetActive(true);
+                return;
+            }
+
             if (!isTexting)
             {
                 curLogIndex++;
@@ -110,7 +126,7 @@ public class TalkManager : SingleTon<TalkManager>
 
             if (talkCanvas.gameObject.activeSelf == false)
             {
-                //대화창 보이게하기 + 효과음
+                //대화창 보이게하기
                 talkCanvas.gameObject.SetActive(true);
 
                 //대화모드
@@ -119,8 +135,8 @@ public class TalkManager : SingleTon<TalkManager>
 
             SoundManager.Instance.UIAudioPlay(UISound.Next);
         
-            nameText.text = curDlog.dialogue[curLogIndex-1].name;
-            TextFlow(dialogueText, curDlog.dialogue[curLogIndex-1].log);
+            nameText.text = curDlog.dialogue[curLogIndex].name;
+            TextFlow(dialogueText, curDlog.dialogue[curLogIndex].log);
 
         }
         else if (!isTexting)
@@ -128,7 +144,7 @@ public class TalkManager : SingleTon<TalkManager>
             talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
             StartCoroutine(CanvasActive());
 
-            curLogIndex = 0;
+            curLogIndex = -1;
 
             //대화모드 해제
             InputManager.Instance.ChangeState(StateName.Idle);
