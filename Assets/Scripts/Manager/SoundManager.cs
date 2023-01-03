@@ -82,4 +82,10 @@ public class SoundManager : SingleTon<SoundManager>
         uiAudio.Play();
     }
 
+    public void JustAudioPlay(AudioClip clip)
+    {
+        uiAudio.clip = clip;
+        uiAudio.Play();
+    }
+
 }

@@ -28,6 +28,9 @@ public class TVManager : SingleTon<TVManager>
     [SerializeField]
     private Material error;
 
+    [SerializeField]
+    private Animator cavinetAnim;
+
     private MeshRenderer mash;
 
     private int curImage = 0;
@@ -83,6 +86,9 @@ public class TVManager : SingleTon<TVManager>
 
         mash.material = error;
 
+        cavinetAnim.GetComponent<AudioSource>().Play();
+        cavinetAnim.SetTrigger("Open");
+        
     }
 
     private void ChangeChannel()

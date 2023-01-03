@@ -15,10 +15,16 @@ public class Elecable : MonoBehaviour
     
     public void On()
     {
-        //칼이 있을 때
-        isOn = true;
-        half.SetActive(true);
-        all.SetActive(false);
+        if (GameManager.Instance.IsCurCursor("Knife"))
+        {
+            //칼이 있을 때
+            isOn = true;
+            half.SetActive(true);
+            all.SetActive(false);
+
+            ElecManager.Instance.ElecUpdate(this.GetComponent<Elecable>());
+
+        }
     }
 
     public void Off()

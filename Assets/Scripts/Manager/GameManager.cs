@@ -23,6 +23,9 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private CinemachineVirtualCamera frontCam;
 
+    [SerializeField]
+    private Image horrorImage;
+
     private void Start()
     {
         Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);//기본 커서 이미지
@@ -64,6 +67,30 @@ public class GameManager :  SingleTon<GameManager>
 
 
     //----------------------씬 관련------------------------
+
+
+    public void HorrorImage(Sprite img)
+    {
+        horrorImage.sprite = img;
+        horrorImage.gameObject.SetActive(true);
+        StartCoroutine(ActFalse());
+    }
+
+    public void HorrorImage(Sprite img, AudioClip clip)
+    {
+        SoundManager.Instance.JustAudioPlay(clip);
+
+        horrorImage.sprite = img;
+        horrorImage.gameObject.SetActive(true);
+        StartCoroutine(ActFalse());
+    }
+
+    private IEnumerator ActFalse()
+    {
+        yield return new WaitForSeconds(2f);
+        horrorImage.gameObject.SetActive(false);
+
+    }
 
     public void BloodyScene()
     {
