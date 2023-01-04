@@ -75,6 +75,7 @@ public class GameManager :  SingleTon<GameManager>
 
         horrorImage.sprite = img;
         horrorImage.gameObject.SetActive(true);
+
         StartCoroutine(ActFalse());
     }
 
@@ -82,6 +83,7 @@ public class GameManager :  SingleTon<GameManager>
     {
         yield return new WaitForSeconds(0.5f);
         horrorImage.gameObject.SetActive(false);
+       // BloodManager.Instance.Hurt(5);
 
     }
 

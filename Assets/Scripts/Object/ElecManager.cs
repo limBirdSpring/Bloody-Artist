@@ -38,7 +38,7 @@ public class ElecManager : SingleTon<ElecManager>
             half.SetActive(true);
             all.SetActive(false);
 
-            if (elecList[0] == red && elecList[1] == green && elecList[2] == blue && elecList[3] == black)
+            if (elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
             {
                 //만약 정답이라면
                 TVManager.Instance.ChangeTV();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class State_Paintball : State
 {
+    [SerializeField]
+    private GameObject paintBall;
+
     public override void Action()
     {
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
@@ -25,7 +28,16 @@ public class State_Paintball : State
             Debug.DrawRay(ray.origin, ray.direction * 20, new Color(255, 1, 1, 1), 1);
             Debug.Log(hit.collider.gameObject.name);
 
+
             //페인트볼 쏘기 진행
+            if(hit.collider !=null)
+            {
+                Instantiate(paintBall);
+            }
+
+            //페인트볼 인터액션 진행
+            PaintAdapter paint = hit.collider.gameObject.GetComponent<PaintAdapter>();
+            paint?.PaintInteraction();
 
             //InterActionAdapter inter = hit.collider.gameObject.GetComponent<InterActionAdapter>();
             //inter?.Interaction();
