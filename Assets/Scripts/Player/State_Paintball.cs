@@ -10,6 +10,7 @@ public class State_Paintball : State
     public override void Action()
     {
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
+        Cursor.visible = true;
 
         if (Input.GetButtonUp("PaintBall"))//페인트볼
             InputManager.Instance.ChangeState(StateName.Idle);
@@ -32,15 +33,13 @@ public class State_Paintball : State
             //페인트볼 쏘기 진행
             if(hit.collider !=null)
             {
-                Instantiate(paintBall);
+                //Instantiate(paintBall);
             }
 
             //페인트볼 인터액션 진행
             PaintAdapter paint = hit.collider.gameObject.GetComponent<PaintAdapter>();
             paint?.PaintInteraction();
 
-            //InterActionAdapter inter = hit.collider.gameObject.GetComponent<InterActionAdapter>();
-            //inter?.Interaction();
         }
     }
 }
