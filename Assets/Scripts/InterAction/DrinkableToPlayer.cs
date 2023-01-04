@@ -17,5 +17,20 @@ public class DrinkableToPlayer : MonoBehaviour
             ItemManager.Instance.UsedItem("FePill");
             BloodManager.Instance.SubTired(30);
         }
+
+        if (GameManager.Instance.IsCurCursor("Coffee"))//커서가 커피일때
+        {
+            gameObject.GetComponent<AudioSource>().Play();
+            Debug.Log("커피");
+            ItemManager.Instance.UsedItem("Coffee");
+            StartCoroutine(AddExpCoroutine());
+            
+        }
+    }
+
+    private IEnumerator AddExpCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        ExpManager.Instance.AddExp("Pink");
     }
 }

@@ -21,6 +21,8 @@ public enum UISound
     Size
 }
 
+
+
 [Serializable]
 public struct UISFX
 {
@@ -28,12 +30,33 @@ public struct UISFX
     public AudioClip clip;
 }
 
+public enum BGMSound
+{
+    Playing,
+    Exhibition,
+    Run,
+    RunFast,
+    Classic,
+    Classic_Red,
+    Ending,
+}
+
+[Serializable]
+public struct BGM
+{
+    public BGMSound bgmSound;
+    public AudioClip clip;
+}
+
 
 public class SoundManager : SingleTon<SoundManager>
 {
     public List<UISFX> uiSFXes;
+    public List<BGM> bgms;
 
     private AudioSource uiAudio;
+
+
 
     [SerializeField]
     private AudioSource bgmAudio;
@@ -59,6 +82,16 @@ public class SoundManager : SingleTon<SoundManager>
     {
         uiAudio.clip = clip;
         uiAudio.Play();
+    }
+
+    public void SetBgm(BGMSound name)
+    {
+        for (int i = 0; i < bgms.Count; i++)
+        {
+            if (bgms[i].bgmSound == name)
+                bgmAudio.clip = bgms[i].clip;
+        }
+        bgmAudio.Play();
     }
 
 }

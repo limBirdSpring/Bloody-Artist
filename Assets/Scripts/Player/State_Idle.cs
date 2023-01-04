@@ -50,8 +50,11 @@ public class State_Idle : State
 
         if (Input.GetButton("PaintBall"))//페인트볼
         {
-            footStep.gameObject.SetActive(false);
-            InputManager.Instance.ChangeState(StateName.PaintBall);
+            if (ItemManager.Instance.FindItem("PaintBallGun"))
+            {
+                footStep.gameObject.SetActive(false);
+                InputManager.Instance.ChangeState(StateName.PaintBall);
+            }
         }
         if (Input.GetButton("Research"))//조사
         {

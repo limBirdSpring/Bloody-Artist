@@ -12,7 +12,7 @@ public class State_Paintball : State
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;
 
-        if (Input.GetButtonUp("PaintBall"))//페인트볼
+        if (Input.GetButtonUp("PaintBall") )//페인트볼
             InputManager.Instance.ChangeState(StateName.Idle);
 
         if (Input.GetMouseButtonDown(0))
