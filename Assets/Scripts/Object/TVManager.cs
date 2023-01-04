@@ -61,7 +61,7 @@ public class TVManager : SingleTon<TVManager>
                 break;
             }
 
-            if (i == channelList.Count - 2)
+            if (i == channelList.Count - 1)
             {
                 if (curImage == channelList[i].curChannel)
                 {

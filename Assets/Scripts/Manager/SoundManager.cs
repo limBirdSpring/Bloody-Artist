@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,39 +13,30 @@ public enum UISound
     Next,
     ScreenOn,
     Drink,
+    Horror,
+    GetItem,
+    UsedKnife,
+    Hurt,
+    Punch,
     Size
+}
+
+[Serializable]
+public struct UISFX
+{
+    public UISound uiSound;
+    public AudioClip clip;
 }
 
 
 public class SoundManager : SingleTon<SoundManager>
 {
+    public List<UISFX> uiSFXes;
+
     private AudioSource uiAudio;
 
     [SerializeField]
     private AudioSource bgmAudio;
-
-    [SerializeField]
-    private AudioClip inven;
-
-    [SerializeField]
-    private AudioClip paper;
-
-    [SerializeField]
-    private AudioClip itemSet;
-
-    [SerializeField]
-    private AudioClip click;
-
-    [SerializeField]
-    private AudioClip next;
-
-    [SerializeField]
-    private AudioClip screenOn;
-
-    [SerializeField]
-    private AudioClip drink;
-
-
 
 
     private void Awake()
@@ -55,29 +47,10 @@ public class SoundManager : SingleTon<SoundManager>
 
     public void UIAudioPlay(UISound name)
     {
-        switch(name)
+        for(int i = 0; i < uiSFXes.Count; i++)
         {
-            case UISound.Inven:
-                uiAudio.clip = inven;
-                break;
-            case UISound.ItemSet:
-                uiAudio.clip = itemSet;
-                break;
-            case UISound.Paper:
-                uiAudio.clip = paper;
-                break;
-            case UISound.Click:
-                uiAudio.clip = click;
-                break;
-            case UISound.Next:
-                uiAudio.clip = next;
-                break;
-            case UISound.Drink:
-                uiAudio.clip = drink;
-                break;
-            case UISound.ScreenOn:
-                uiAudio.clip = screenOn;
-                break;
+            if (uiSFXes[i].uiSound == name)
+               uiAudio.clip = uiSFXes[i].clip;
         }
         uiAudio.Play();
     }

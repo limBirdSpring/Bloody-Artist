@@ -72,7 +72,9 @@ public class State_Idle : State
         if (Input.GetButtonDown("UsedKnife"))//Ä® »ç¿ë
         {
             if (ItemManager.Instance.FindItem("Knife"))
+
                 BloodManager.Instance.UsedKnife();
+            
         }
 
     }

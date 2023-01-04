@@ -16,6 +16,7 @@ public enum StateName
     Horror,
     PaintBall,
     Block,
+    MiniGame,
     Size,
 }
 
@@ -55,5 +56,15 @@ public class InputManager : SingleTon<InputManager>
                 return;
             }
         }
+    }
+
+    public StateName GetCurState()
+    {
+        for(int i=0; i<allState.Count;i++)
+        {
+            if (curState == allState[i].state)
+                return allState[i].stateName;
+        }
+        return StateName.Block;
     }
 }

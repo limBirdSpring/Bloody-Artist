@@ -56,6 +56,7 @@ public class ItemManager : SingleTon<ItemManager>
 
             if (inventoryItems[i].fileName == fileName)//이미 가지고 있는 아이템이라면 개수변경
             {
+                SoundManager.Instance.UIAudioPlay(UISound.GetItem);
                 ItemInfo item = inventoryItems[i];
                 item.num++;
                 inventoryItems[i] = item;
@@ -69,6 +70,7 @@ public class ItemManager : SingleTon<ItemManager>
 
             if (items[i].fileName == fileName)
             {
+                SoundManager.Instance.UIAudioPlay(UISound.GetItem);
                 inventoryItems.Add(items[i]);
                 TalkManager.Instance.RenderGetItemText(items[i]);
                 return;

@@ -107,6 +107,8 @@ public class BloodManager : SingleTon<BloodManager>
 
     public void Hurt(int damage)
     {
+        SoundManager.Instance.UIAudioPlay(UISound.Hurt);
+
         //피 색 변경
         ExpManager.Instance.SetExp("Red");
 
@@ -189,6 +191,7 @@ public class BloodManager : SingleTon<BloodManager>
     {
         if (arm.activeSelf == false)
         {
+            SoundManager.Instance.UIAudioPlay(UISound.UsedKnife);
             GameManager.Instance.ChangeCamToFront();
             //칼을 사용해 현재 색의 피를 흘리는 애니메이션
             arm.SetActive(true);

@@ -15,8 +15,9 @@ public class Elecable : MonoBehaviour
     
     public void On()
     {
-        if (GameManager.Instance.IsCurCursor("Knife"))
+        if (GameManager.Instance.IsCurCursor("Knife") && isOn == false)
         {
+            GetComponent<AudioSource>().Play();
             //칼이 있을 때
             isOn = true;
             half.SetActive(true);

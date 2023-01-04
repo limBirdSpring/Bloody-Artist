@@ -9,6 +9,8 @@ public class DoorOpenable : MonoBehaviour
     [SerializeField]
     private string usedItemName;
 
+    public bool miniGame;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -18,9 +20,18 @@ public class DoorOpenable : MonoBehaviour
     {
         if (ItemManager.Instance.curSetItem.fileName == usedItemName)
         {
-            GetComponent<AudioSource>()?.Play();
-            
-            anim.SetTrigger("Open");
+            if (miniGame)
+            {
+                InputManager.Instance.ChangeState(StateName.MiniGame);
+                miniGame = false;
+            }
+
+            else
+            {
+                anim.SetTrigger("Open");
+                GetComponent<AudioSource>()?.Play();
+            }
+           
         }
     }
 }

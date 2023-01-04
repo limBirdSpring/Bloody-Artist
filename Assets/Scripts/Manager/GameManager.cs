@@ -71,14 +71,7 @@ public class GameManager :  SingleTon<GameManager>
 
     public void HorrorImage(Sprite img)
     {
-        horrorImage.sprite = img;
-        horrorImage.gameObject.SetActive(true);
-        StartCoroutine(ActFalse());
-    }
-
-    public void HorrorImage(Sprite img, AudioClip clip)
-    {
-        SoundManager.Instance.JustAudioPlay(clip);
+        SoundManager.Instance.UIAudioPlay(UISound.Horror);
 
         horrorImage.sprite = img;
         horrorImage.gameObject.SetActive(true);
@@ -87,7 +80,7 @@ public class GameManager :  SingleTon<GameManager>
 
     private IEnumerator ActFalse()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         horrorImage.gameObject.SetActive(false);
 
     }
