@@ -23,6 +23,7 @@ public class DrinkableToPlayer : MonoBehaviour
             gameObject.GetComponent<AudioSource>().Play();
             Debug.Log("Ä¿ÇÇ");
             ItemManager.Instance.UsedItem("Coffee");
+            BloodManager.Instance.SubTired(10);
             StartCoroutine(AddExpCoroutine());
             
         }
