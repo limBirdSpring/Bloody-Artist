@@ -35,7 +35,7 @@ public class Arcade : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(coolTime);
             meshRenderer.material = ghost;
             audio.Play();
 

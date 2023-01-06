@@ -17,7 +17,7 @@ public class ElecManager : SingleTon<ElecManager>
     [SerializeField]
     private Elecable blue;
 
-    private List<Elecable> elecList;
+    private List<Elecable> elecList = new List<Elecable>();
 
     [SerializeField]
     private GameObject half;
@@ -25,16 +25,40 @@ public class ElecManager : SingleTon<ElecManager>
     [SerializeField]
     private GameObject all;
 
+    private bool isOn;
 
-    public void ElecUpdate(Elecable elec)
+    private void Start()
     {
-         elecList.Add(elec);
+        for(int i=0; i < 4; i++)
+            elecList[i] = null;
+    }
+
+    public void ElecUpdate(string name)
+    {
+        switch(name)
+        {
+            case "Red":
+                elecList.Add(red);
+                break;
+            case "Black":
+                elecList.Add(black);
+                break;
+            case "Green":
+                elecList.Add(green);
+                break;
+            case "Blue":
+                elecList.Add(blue);
+                break;
+        }
+
+         
     }
 
     public void Cut()
     {
-        if (GameManager.Instance.IsCurCursor("Knife"))
+        if (GameManager.Instance.IsCurCursor("Knife") && !isOn)
         {
+            GetComponent<AudioSource>().Play();
             half.SetActive(true);
             all.SetActive(false);
 
@@ -42,6 +66,7 @@ public class ElecManager : SingleTon<ElecManager>
             {
                 //만약 정답이라면
                 TVManager.Instance.ChangeTV();
+                isOn = true;
             }
             else
             {
@@ -50,10 +75,14 @@ public class ElecManager : SingleTon<ElecManager>
                 black.Off();
                 green.Off();
                 blue.Off();
+                half.SetActive(false);
+                all.SetActive(true);
 
-                //전기 공격
+                //전기 공격 (파티클)
+
                 BloodManager.Instance.Hurt(5);
-                elecList.Clear();
+                for (int i = 0; i < 4; i++)
+                    elecList[i] = null;
             }
         }
     }

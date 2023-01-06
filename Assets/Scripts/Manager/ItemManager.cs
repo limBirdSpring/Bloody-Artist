@@ -35,6 +35,7 @@ public class ItemManager : SingleTon<ItemManager>
     [SerializeField]
     private Image curSetitemImage;//현재 장착 아이템 이미지
 
+   
     public ItemInfo curSetItem { get; private set; } //현재 장착 아이템
 
     private void Awake()
@@ -50,6 +51,7 @@ public class ItemManager : SingleTon<ItemManager>
 
         //게임 테스트용 아이템 얻기
         GetItem("Knife");
+        GetItem("MyStatue");
         GetItem("PaintBallGun");
         //-----------------------
     }
@@ -116,13 +118,25 @@ public class ItemManager : SingleTon<ItemManager>
         return false;
     }
 
+    public int FindItemNum(string fileName)//해당 아이템이 인벤토리에 몇 개 있는지 확인
+    {
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].fileName == fileName)
+            {
+                return inventoryItems[i].num;
+            }
+        }
+        return 0;
+    }
+
     public void SetItem(int num)//인벤토리에서 선택한 아이템 장착
     {
         Debug.Log("아이템장착");
         if (inventoryItems.Count >num)
         {
             curSetItem = inventoryItems[num];
-            GameManager.instance.CursorChange(inventoryItems[num].image);
+            GameManager.Instance.CursorChange(inventoryItems[num].image);
             curSetitemImage.sprite = ItemManager.Instance.curSetItem.sprite;
         }
     }

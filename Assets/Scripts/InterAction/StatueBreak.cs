@@ -11,7 +11,7 @@ public class StatueBreak : MonoBehaviour
 
     public void Break()
     {
-        if (GameManager.Instance.IsCurCursor("Research")) //경매가 시작되었을때도 분류
+        if (GameManager.Instance.IsCurCursor("Research") && AuctionManager.Instance.isStartAuction)
         {
             if (miniGame)
             {

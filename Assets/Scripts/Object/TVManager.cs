@@ -58,7 +58,7 @@ public class TVManager : SingleTon<TVManager>
         {
             if (channelList[i].curChannel != channelList[i + 1].curChannel)
             {
-                break;
+                return;
             }
 
             if (i == channelList.Count - 1)

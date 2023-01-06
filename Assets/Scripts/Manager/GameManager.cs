@@ -26,6 +26,9 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private Image horrorImage;
 
+    [HideInInspector]
+    public bool isHorrorMode; //해당 변수에 따라 리서치모드가 막힌다.
+
     private void Start()
     {
         Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);//기본 커서 이미지
@@ -71,12 +74,15 @@ public class GameManager :  SingleTon<GameManager>
 
     public void HorrorImage(Sprite img)
     {
-        SoundManager.Instance.UIAudioPlay(UISound.Horror);
+        if (IsCurCursor("Research"))
+        {
+            SoundManager.Instance.UIAudioPlay(UISound.Horror);
 
-        horrorImage.sprite = img;
-        horrorImage.gameObject.SetActive(true);
+            horrorImage.sprite = img;
+            horrorImage.gameObject.SetActive(true);
 
-        StartCoroutine(ActFalse());
+            StartCoroutine(ActFalse());
+        }
     }
 
     private IEnumerator ActFalse()

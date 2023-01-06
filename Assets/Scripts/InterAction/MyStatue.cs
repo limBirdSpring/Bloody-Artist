@@ -15,9 +15,11 @@ public class MyStatue : MonoBehaviour
     {
         if (GameManager.Instance.IsCurCursor("MyStatue"))
         {
+            ItemManager.Instance.UsedItem("MyStatue");
             GetComponent<AudioSource>().Play();
             notice.SetActive(true);
             statue.SetActive(true);
+            AuctionManager.Instance.StartAuction();
         }
     }
 }

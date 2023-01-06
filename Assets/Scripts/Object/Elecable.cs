@@ -23,7 +23,7 @@ public class Elecable : MonoBehaviour
             half.SetActive(true);
             all.SetActive(false);
 
-            ElecManager.Instance.ElecUpdate(this.GetComponent<Elecable>());
+            ElecManager.Instance.ElecUpdate(gameObject.name);
 
         }
     }
