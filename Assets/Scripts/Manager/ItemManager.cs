@@ -53,6 +53,15 @@ public class ItemManager : SingleTon<ItemManager>
         GetItem("Knife");
         GetItem("MyStatue");
         GetItem("PaintBallGun");
+        GetItem("PaintRoller");
+        GetItem("Red");
+        GetItem("Red");
+        GetItem("Blue");
+        GetItem("Blue");
+        GetItem("Green");
+        GetItem("Green");
+        GetItem("Black");
+        GetItem("Black");
         //-----------------------
     }
 
@@ -106,6 +115,27 @@ public class ItemManager : SingleTon<ItemManager>
         }
     }
 
+    public void UsedItem(string fileName, int num)//아이템 사용
+    {
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].fileName == fileName)
+            {
+                ItemInfo item = inventoryItems[i];
+                item.num-=num;
+                inventoryItems[i] = item;
+
+                if (inventoryItems[i].num == 0)//개수가 0개라면 인벤토리에서 지움
+                {
+                    inventoryItems.RemoveAt(i);
+                    SetItem(0);
+                }
+
+                return;
+            }
+        }
+    }
+
     public bool FindItem(string fileName)//해당 아이템이 인벤토리에 있는지 확인
     {
         for (int i = 0; i < inventoryItems.Count; i++)
@@ -139,6 +169,20 @@ public class ItemManager : SingleTon<ItemManager>
             GameManager.Instance.CursorChange(inventoryItems[num].image);
             curSetitemImage.sprite = ItemManager.Instance.curSetItem.sprite;
         }
+    }
+
+    public void SetItem(string fileName)//인벤토리에서 선택한 아이템 장착
+    {
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].fileName == fileName)
+            {
+                curSetItem = inventoryItems[i];
+                GameManager.Instance.CursorChange(inventoryItems[i].image);
+                curSetitemImage.sprite = ItemManager.Instance.curSetItem.sprite;
+            }
+        }
+        
     }
 
     public void UsedCurSetItem()//현재 장착한 아이템 사용
