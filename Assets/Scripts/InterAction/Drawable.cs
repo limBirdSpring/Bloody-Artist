@@ -9,6 +9,8 @@ public class Drawable : MonoBehaviour
 
     private int step=0;
 
+    private Coroutine curCoroutine;
+
     private MeshRenderer mesh;
 
     [SerializeField]
@@ -39,38 +41,33 @@ public class Drawable : MonoBehaviour
         {
             if (isPainting)
             {
-                if (step==1)
+                if (step==1 && curCoroutine==null)
                 {
-                    cam.Priority = 20;
-                    GetComponent<AudioSource>().Play();
+                    InputManager.Instance.ChangeState(StateName.Research);
+
                     ItemManager.Instance.UsedItem("Black", 2);
                     ItemManager.Instance.UsedItem("Red", 2);
                     ItemManager.Instance.SetItem("PaintRoller");
-                    mesh.material = met3;
-                    cam.Priority = 1;
-                    step++;
+                    curCoroutine = StartCoroutine(DrawCoroutine(met3));
 
                 }
-                else if (step == 2)
+                else if (step == 2 && curCoroutine == null)
                 {
-                    cam.Priority = 20;
-                    GetComponent<AudioSource>().Play();
+                    InputManager.Instance.ChangeState(StateName.Research);
+     
                     ItemManager.Instance.UsedItem("Green", 2);
                     ItemManager.Instance.SetItem("PaintRoller");
-                    mesh.material = met4;
-                    cam.Priority = 1;
-                    step++;
+                    curCoroutine = StartCoroutine(DrawCoroutine(met4));
                 }
-                else if(step == 3)
+                else if(step == 3 && curCoroutine == null)
                 {
-                    cam.Priority = 20;
-                    ItemManager.Instance.UsedItem("PaintRoller");
 
+                    InputManager.Instance.ChangeState(StateName.Research);
                     //튀어나오기
-                    statue.GetComponent<AudioSource>().Play();
+                    
                     statue.SetActive(true);
                     statue.GetComponent<Rigidbody>().AddForce(transform.forward * -5, ForceMode.Impulse);
-                    StartCoroutine(HorrorCoroutine());
+                    curCoroutine = StartCoroutine(HorrorCoroutine());
                     step++;
                 }
             }
@@ -81,15 +78,14 @@ public class Drawable : MonoBehaviour
                     ItemManager.Instance.FindItemNum("Black") == 2 &&
                     ItemManager.Instance.FindItemNum("Green") == 2)
                 {
+                    InputManager.Instance.ChangeState(StateName.BlockResearch);
                     cam.Priority = 20;
-                    GetComponent<AudioSource>().Play();
                     ItemManager.Instance.UsedItem("Blue", 2);
                     ItemManager.Instance.SetItem("PaintRoller");
                     isPainting = true;
                     //그림 메쉬 변형
-                    mesh.material = met2;
-                    step++;
-                    cam.Priority = 1;
+                    curCoroutine = StartCoroutine(DrawCoroutine(met2));
+                    //cam.Priority = 1;
                 }
                 else
                 {
@@ -101,10 +97,22 @@ public class Drawable : MonoBehaviour
 
     }
 
+    private IEnumerator DrawCoroutine(Material material)
+    {
+        GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(1.2f);
+        mesh.material = material;
+        step++;
+        curCoroutine = null;
+    }
+
     private IEnumerator HorrorCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         cam.Priority = 1;
         statue.GetComponent<CapsuleCollider>().enabled = true;
+        ItemManager.Instance.UsedItem("PaintRoller");
+        InputManager.Instance.ChangeState(StateName.Idle);
+
     }
 }

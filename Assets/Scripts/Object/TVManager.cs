@@ -49,7 +49,7 @@ public class TVManager : SingleTon<TVManager>
 
     private void Update()
     {
-        CheckChannel();
+        //CheckChannel();
     }
 
     private void CheckChannel()
@@ -58,11 +58,14 @@ public class TVManager : SingleTon<TVManager>
         {
             if (channelList[i].curChannel != channelList[i + 1].curChannel)
             {
+
+                Debug.Log(i);
                 return;
             }
 
-            if (i == channelList.Count - 1)
+            if (i == channelList.Count - 2)
             {
+
                 if (curImage == channelList[i].curChannel)
                 {
                     //모든 화면 바뀌고 자물쇠 열림
@@ -75,6 +78,7 @@ public class TVManager : SingleTon<TVManager>
     private void OpenCavinet()
     {
         //에러소리 재생
+        GetComponent<AudioSource>().Play();
 
         StopCoroutine(coroutine);
 
@@ -107,8 +111,6 @@ public class TVManager : SingleTon<TVManager>
                 curImage++;
             else
                 curImage = 0;
-
-            Debug.Log(curImage);
 
             switch (curImage)
             {

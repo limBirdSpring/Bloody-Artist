@@ -27,11 +27,6 @@ public class ElecManager : SingleTon<ElecManager>
 
     private bool isOn;
 
-    private void Start()
-    {
-        for(int i=0; i < 4; i++)
-            elecList[i] = null;
-    }
 
     public void ElecUpdate(string name)
     {
@@ -62,9 +57,10 @@ public class ElecManager : SingleTon<ElecManager>
             half.SetActive(true);
             all.SetActive(false);
 
-            if (elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
+            if (elecList.Count == 4 && elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
             {
                 //만약 정답이라면
+                SoundManager.Instance.UIAudioPlay(UISound.Good);
                 TVManager.Instance.ChangeTV();
                 isOn = true;
             }
@@ -81,8 +77,7 @@ public class ElecManager : SingleTon<ElecManager>
                 //전기 공격 (파티클)
 
                 BloodManager.Instance.Hurt(5);
-                for (int i = 0; i < 4; i++)
-                    elecList[i] = null;
+                elecList.Clear();
             }
         }
     }

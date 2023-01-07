@@ -17,6 +17,7 @@ public enum StateName
     PaintBall,
     Block,
     MiniGame,
+    BlockResearch,
     Size,
 }
 

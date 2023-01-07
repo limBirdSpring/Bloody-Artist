@@ -18,6 +18,7 @@ public enum UISound
     UsedKnife,
     Hurt,
     Punch,
+    Good,
     Size
 }
 

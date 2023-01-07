@@ -10,6 +10,7 @@ public class BookCaseTargetOnable : MonoBehaviour
     {
 
         //완료 소리 재생
+        SoundManager.Instance.UIAudioPlay(UISound.Good);
         Debug.Log("페인트볼");
         isOn = true;
         BookCaseToArcade.Instance.ArcadeOn();
