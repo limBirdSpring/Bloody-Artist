@@ -40,6 +40,7 @@ public enum BGMSound
     Classic,
     Classic_Red,
     Ending,
+    None,
 }
 
 [Serializable]

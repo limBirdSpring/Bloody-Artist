@@ -22,6 +22,9 @@ public class SwitchControler : MonoBehaviour
     [SerializeField]
     private Animator mediaDoor;
 
+    [SerializeField]
+    private Animator yayoyiDoor;
+
 
     private void Update()
     {
@@ -55,6 +58,8 @@ public class SwitchControler : MonoBehaviour
         {
             mediaDoor.gameObject.GetComponent<AudioSource>().Play();
             mediaDoor.SetBool("IsOpen", true);
+            yayoyiDoor.gameObject.GetComponent<AudioSource>().Play();
+            yayoyiDoor.SetBool("IsOpen", true);
 
             hallSwitch.SetBool("IsOn", false);
         }
@@ -62,6 +67,10 @@ public class SwitchControler : MonoBehaviour
         {
             mediaDoor.gameObject.GetComponent<AudioSource>().Play();
             mediaDoor.SetBool("IsOpen", false);
+            yayoyiDoor.gameObject.GetComponent<AudioSource>().Play();
+            yayoyiDoor.SetBool("IsOpen", false);
+
+            if (GameManager.Instance.)
         }
     }
 

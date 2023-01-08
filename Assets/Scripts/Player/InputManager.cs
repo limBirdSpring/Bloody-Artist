@@ -37,6 +37,8 @@ public class InputManager : SingleTon<InputManager>
 
     private State curState;
 
+
+
     private void Start()
     {
         curState = allState[0].state;

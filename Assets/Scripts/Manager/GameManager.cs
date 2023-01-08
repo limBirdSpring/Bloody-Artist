@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager :  SingleTon<GameManager>
 {
 
-    private bool isRunMode;//런모드 변경 (get,set)
+    public bool isRunMode { get; private set; };//런모드 변경 (get,set)
 
     [SerializeField]
     private Texture2D cursorImg;//커서이미지
@@ -70,6 +70,20 @@ public class GameManager :  SingleTon<GameManager>
 
 
     //----------------------씬 관련------------------------
+
+
+    public void StartRunMode()
+    {
+        isRunMode = true;
+        SoundManager.Instance.SetBgm(BGMSound.Run);
+    }
+
+    public void EndRunMode()
+    {
+        isRunMode = false;
+        SoundManager.Instance.SetBgm(BGMSound.Playing);
+    }
+
 
 
     public void HorrorImage(Sprite img)
@@ -148,10 +162,6 @@ public class GameManager :  SingleTon<GameManager>
     public void SceneChange(string sceneName)
     {
         //씬 체인지
-    }
-
-    public void RunMode()//술래잡기 모드 변경 시 효과 (특정 키 사용 불가 등)
-    {
     }
 
 

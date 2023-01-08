@@ -23,7 +23,7 @@ public class StatueBreak : MonoBehaviour
                 GetComponent<AudioSource>().Play();
                 if (amber != null)
                 {
-                    Instantiate(amber, transform.position, transform.rotation);
+                    amber.SetActive(true);
                 }
                 Destroy(gameObject);
             }
