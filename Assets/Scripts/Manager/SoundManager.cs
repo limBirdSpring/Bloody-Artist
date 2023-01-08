@@ -40,6 +40,7 @@ public enum BGMSound
     Classic,
     Classic_Red,
     Ending,
+    WhiteSilence,
     None,
 }
 
@@ -58,7 +59,7 @@ public class SoundManager : SingleTon<SoundManager>
 
     private AudioSource uiAudio;
 
-
+    public BGMSound curBGM { get; private set; } = BGMSound.Playing;
 
     [SerializeField]
     private AudioSource bgmAudio;
@@ -72,10 +73,10 @@ public class SoundManager : SingleTon<SoundManager>
 
     public void UIAudioPlay(UISound name)
     {
-        for(int i = 0; i < uiSFXes.Count; i++)
+        for (int i = 0; i < uiSFXes.Count; i++)
         {
             if (uiSFXes[i].uiSound == name)
-               uiAudio.clip = uiSFXes[i].clip;
+                uiAudio.clip = uiSFXes[i].clip;
         }
         uiAudio.Play();
     }
@@ -88,12 +89,18 @@ public class SoundManager : SingleTon<SoundManager>
 
     public void SetBgm(BGMSound name)
     {
+
         for (int i = 0; i < bgms.Count; i++)
         {
             if (bgms[i].bgmSound == name)
+            {
                 bgmAudio.clip = bgms[i].clip;
+                curBGM = name;
+            }
+            bgmAudio.Play();
         }
-        bgmAudio.Play();
-    }
 
+
+
+    }
 }
