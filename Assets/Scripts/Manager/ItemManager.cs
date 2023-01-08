@@ -54,6 +54,7 @@ public class ItemManager : SingleTon<ItemManager>
         GetItem("MyStatue");
         GetItem("PaintBallGun");
         GetItem("PaintRoller");
+        GetItem("LightKey");
         GetItem("Red");
         GetItem("Red");
         GetItem("Blue");

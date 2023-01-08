@@ -43,9 +43,16 @@ public class ManequinControler : MonoBehaviour
 
     private void Move()
     {
-        
+
         if (isMove && curCoroutine == null)
+        {
             curCoroutine = StartCoroutine(MoveCoroutine());
+
+            if (!GameManager.Instance.isRunMode)
+            {
+                Destroy(gameObject);//Àüµî ²ô¸é »ç¶óÁü
+            }
+        }
     }
 
     private IEnumerator MoveCoroutine()

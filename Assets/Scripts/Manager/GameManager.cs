@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager :  SingleTon<GameManager>
 {
 
-    public bool isRunMode { get; private set; };//런모드 변경 (get,set)
+    public bool isRunMode { get; private set; }//런모드 변경 (get,set)
 
     [SerializeField]
     private Texture2D cursorImg;//커서이미지

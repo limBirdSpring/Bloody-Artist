@@ -70,7 +70,8 @@ public class SwitchControler : MonoBehaviour
             yayoyiDoor.gameObject.GetComponent<AudioSource>().Play();
             yayoyiDoor.SetBool("IsOpen", false);
 
-            if (GameManager.Instance.)
+            if (GameManager.Instance.isRunMode)
+                GameManager.Instance.EndRunMode();
         }
     }
 
