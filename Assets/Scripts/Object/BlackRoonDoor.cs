@@ -12,9 +12,8 @@ public class BlackRoonDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         light.SetActive(false);
         other.transform.position = playerEndPos.position;
-        Debug.Log("순간이동");
+        ExpManager.Instance.AddExp("White");
     }
 }

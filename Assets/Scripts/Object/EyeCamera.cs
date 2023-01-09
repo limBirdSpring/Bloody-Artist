@@ -3,27 +3,35 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EyeCamera : MonoBehaviour
+public class EyeCamera : SingleTon<EyeCamera>
 {
     private int hp = 100;
 
     [SerializeField]
     private GameObject door;
 
+    public bool horrorOn { get; private set; } = false;
+
+    private Coroutine coroutine;
+
     private void Start()
     {
-        StartCoroutine(ChangePos());
+        coroutine = StartCoroutine(ChangePos());
     }
 
     public void Hurt()
     {
-        hp -= 10;
+        hp -= 100;
 
         if (hp <= 0)
         {
-            //사람들 매쉬 변경
+            //군중소리/노래소리 변경
+
+            StopCoroutine(coroutine);
+            horrorOn = true;
+
             door.SetActive(true);
-            Destroy(gameObject);
+            GetComponent<MeshRenderer>().enabled = false;
         }
     }
 

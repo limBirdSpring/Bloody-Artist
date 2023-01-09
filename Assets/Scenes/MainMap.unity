@@ -14900,6 +14900,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1982677198}
+  girl: {fileID: 2100000, guid: d22b61c29d5ec564d8952df97cf45c36, type: 2}
+  girl2: {fileID: 2100000, guid: acfcc5cdfc7b897458d83c679022ba31, type: 2}
+  man: {fileID: 2100000, guid: 69231a3f833337140b8c1bab599f5104, type: 2}
+  man2: {fileID: 2100000, guid: 755487b98dd6b3b459522806ea14d1fc, type: 2}
+  girlT: {fileID: 2800000, guid: 39b775deac0c1004085e750ae3a1f4a6, type: 3}
+  girl2T: {fileID: 2800000, guid: 31479b425d953a445b1ac4245df41ca6, type: 3}
+  manT: {fileID: 2800000, guid: e8f8bfbf3d07b5540b9c6be3aff79c12, type: 3}
+  man2T: {fileID: 2800000, guid: d329e6110b24cbc4180aaf62c415a0a5, type: 3}
 --- !u!1001 &421319993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66418,7 +66426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1897367702
 Transform:
   m_ObjectHideFlags: 0
@@ -70252,7 +70260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1982677199
 Transform:
   m_ObjectHideFlags: 0
