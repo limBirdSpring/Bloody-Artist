@@ -40,7 +40,7 @@ public class EyeCamera : SingleTon<EyeCamera>
         while (true)
         {
             yield return new WaitForSeconds(2f);
-            transform.position = new Vector3(Random.Range(-47,-26), 7f, Random.Range(160, 200));
+            transform.position = new Vector3(Random.Range(-47,-26), 7f, Random.Range(199, 226));
         }
     }
 }

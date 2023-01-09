@@ -17,6 +17,8 @@ public class People : MonoBehaviour
 
         if(EyeCamera.Instance.horrorOn)
         {
+            transform.position -= player.transform.forward * 0.2f * Time.deltaTime;
+
             ChangeMesh();
         }
     }
@@ -28,7 +30,7 @@ public class People : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (EyeCamera.Instance.horrorOn)
+        if (collision.gameObject.name == "Player" && EyeCamera.Instance.horrorOn)
             BloodManager.Instance.Hurt(5);
     }
 }
