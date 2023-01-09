@@ -26,6 +26,7 @@ public class StatueBreak : MonoBehaviour
                     amber.SetActive(true);
                 }
                 Destroy(gameObject);
+                InputManager.Instance.ChangeState(StateName.Idle);
             }
         }
     }

@@ -13,10 +13,12 @@ public class Amber : MonoBehaviour
     [SerializeField]
     private ManequinControler manequin;
 
+    private bool isGetExp;
+
     public void Trauma()
     {
-
-        StartCoroutine(TraumaCoroutine());
+        if (!isGetExp)
+            StartCoroutine(TraumaCoroutine());
     }
 
     private IEnumerator TraumaCoroutine()
@@ -42,6 +44,6 @@ public class Amber : MonoBehaviour
 
         GameManager.Instance.StartRunMode();
         manequin.isMove = true;
-
+        isGetExp = true;
     }
 }

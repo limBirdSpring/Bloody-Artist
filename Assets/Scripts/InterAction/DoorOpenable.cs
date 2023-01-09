@@ -30,6 +30,7 @@ public class DoorOpenable : MonoBehaviour
             {
                 anim.SetTrigger("Open");
                 GetComponent<AudioSource>()?.Play();
+                InputManager.Instance.ChangeState(StateName.Idle);
             }
            
         }

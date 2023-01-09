@@ -42,9 +42,18 @@ public class State_Research : State
             Debug.DrawRay(ray.origin, ray.direction * 10, new Color(255, 1, 1, 1), 1);
             Debug.Log(hit.collider.gameObject.name);
 
+            if (GameManager.Instance.isRunMode)
+            {
+                if (hit.collider.gameObject.name != "Swit")
+                    return;
+
+            }
+
             //호러모드일때는 전등 외 사용불가하게 막음
             InterActionAdapter inter = hit.collider.gameObject.GetComponent<InterActionAdapter>();
             inter?.Interaction();
+            
+
         }
     }
 }

@@ -61,16 +61,24 @@ public class State_Idle : State
             footStep.gameObject.SetActive(false);
             InputManager.Instance.ChangeState(StateName.Research);
         }
-        if (Input.GetButtonDown("Inventory"))//인벤토리
-        {
-            footStep.gameObject.SetActive(false);
-            InputManager.Instance.ChangeState(StateName.Inventory);
-        }
+
         if (Input.GetButtonDown("ItemSetRelease"))//아이템 장착해제
         {
             SoundManager.Instance.UIAudioPlay(UISound.Next);
             ItemManager.Instance.SetItem(0);
         }
+
+        if (GameManager.Instance.isRunMode)
+        {
+            return;
+        }
+
+        if (Input.GetButtonDown("Inventory"))//인벤토리
+        {
+            footStep.gameObject.SetActive(false);
+            InputManager.Instance.ChangeState(StateName.Inventory);
+        }
+
 
         if (Input.GetButtonDown("UsedKnife"))//칼 사용
         {
