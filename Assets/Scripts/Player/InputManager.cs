@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.XR;
 
 
@@ -30,7 +31,7 @@ public struct StateMachine
     public State state;
 }
 
-public class InputManager : SingleTon<InputManager>
+public class InputManager : SingleTon<InputManager>, ISavable
 {
     [SerializeField]
     public List<StateMachine> allState = new List<StateMachine>();
@@ -38,6 +39,10 @@ public class InputManager : SingleTon<InputManager>
     private State curState;
 
 
+    public void OnSave()
+    {
+        DataManager.Instance.data = JsonUtility.ToJson(transform.position);
+    }
 
     private void Start()
     {

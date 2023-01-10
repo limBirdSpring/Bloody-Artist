@@ -16,7 +16,7 @@ public class TalkManager : SingleTon<TalkManager>
 {
 
     //--------------------흐르는 텍스트 관련---------------------
-    private bool isTexting;
+    public bool isTexting { get; private set; }
     private Coroutine curCoroutine;
 
     private string prevText = "";
@@ -103,52 +103,86 @@ public class TalkManager : SingleTon<TalkManager>
     //                          대화
     //==========================================================
 
-    public void Talk()
+
+    public void Talk(int i)
     {
 
-        if (curDlog.dialogue.Count > curLogIndex)
+        if (i==0) // 대화가 시작될때
         {
-            if (select.gameObject.activeSelf == true && curDlog.dialogue[curLogIndex + 1].select == false)
-            {
+            //대화창 보이게하기
+            talkCanvas.gameObject.SetActive(true);
 
-            }
-            else if (curLogIndex>=0&& curDlog.dialogue[curLogIndex+1].select == true)
+            //대화모드
+            InputManager.Instance.ChangeState(StateName.BlockResearch);
+        }
+
+        if (curDlog.dialogue.Count > i)
+        {
+            if (curDlog.dialogue[i].select == false)
             {
-                select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[curLogIndex+1].log;
+                nameText.text = curDlog.dialogue[i].name;
+                TextFlow(dialogueText, curDlog.dialogue[i].log);
+            }
+            else
+            {
+                select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[i].log;
                 select.gameObject.SetActive(true);
-                return;
             }
-
-            if (!isTexting)
-            {
-                curLogIndex++;
-            }
-
-            if (talkCanvas.gameObject.activeSelf == false)
-            {
-                //대화창 보이게하기
-                talkCanvas.gameObject.SetActive(true);
-
-                //대화모드
-                InputManager.Instance.ChangeState(StateName.Talking);
-            }
-
-            SoundManager.Instance.UIAudioPlay(UISound.Next);
-        
-            nameText.text = curDlog.dialogue[curLogIndex].name;
-            TextFlow(dialogueText, curDlog.dialogue[curLogIndex].log);
-
         }
-        else if (!isTexting)
+        else // 대화가 끝났을때
         {
-            talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
-            StartCoroutine(CanvasActive());
+             talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
+             StartCoroutine(CanvasActive());
 
-            curLogIndex = -1;
-
-            //대화모드 해제
-            InputManager.Instance.ChangeState(StateName.Idle);
+             //대화모드 해제
+             InputManager.Instance.ChangeState(StateName.Idle);
         }
+
+
+
+        //if (curDlog.dialogue.Count > curLogIndex)
+        //{
+        //    if (select.gameObject.activeSelf == true && curDlog.dialogue[curLogIndex + 1].select == false)
+        //    {
+
+        //    }
+        //    else if (curLogIndex>=0&& curDlog.dialogue[curLogIndex+1].select == true)
+        //    {
+        //        select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[curLogIndex+1].log;
+        //        select.gameObject.SetActive(true);
+        //        return;
+        //    }
+
+        //    if (!isTexting)
+        //    {
+        //        curLogIndex++;
+        //    }
+
+        //    if (talkCanvas.gameObject.activeSelf == false)
+        //    {
+        //        //대화창 보이게하기
+        //        talkCanvas.gameObject.SetActive(true);
+
+        //        //대화모드
+        //        InputManager.Instance.ChangeState(StateName.Talking);
+        //    }
+
+        //    SoundManager.Instance.UIAudioPlay(UISound.Next);
+
+        //    nameText.text = curDlog.dialogue[curLogIndex].name;
+        //    TextFlow(dialogueText, curDlog.dialogue[curLogIndex].log);
+
+        //}
+        //else if (!isTexting)
+        //{
+        //    talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
+        //    StartCoroutine(CanvasActive());
+
+        //    curLogIndex = -1;
+
+        //    //대화모드 해제
+        //    InputManager.Instance.ChangeState(StateName.Idle);
+        //}
 
 
     }

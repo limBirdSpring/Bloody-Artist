@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class BloodManager : SingleTon<BloodManager>
+public class BloodManager : SingleTon<BloodManager>, ISavable
 {
     //피에 관련된 것들 진행
 
@@ -58,6 +58,14 @@ public class BloodManager : SingleTon<BloodManager>
 
 
     //---------------------------------------------------
+
+
+    public void OnSave()
+    {
+        DataManager.Instance.data += JsonUtility.ToJson(hurtPercent);
+        DataManager.Instance.data += JsonUtility.ToJson(tiredPercent);
+        DataManager.Instance.data += JsonUtility.ToJson(curBloodColor);
+    }
 
 
     private void Start()

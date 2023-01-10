@@ -9,10 +9,5 @@ public class State_Talking : State
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;
 
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            TalkManager.Instance.Talk();
-        }
     }
 }

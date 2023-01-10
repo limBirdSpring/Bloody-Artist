@@ -1,7 +1,9 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -25,9 +27,6 @@ public class GameManager :  SingleTon<GameManager>
 
     [SerializeField]
     private Image horrorImage;
-
-    [HideInInspector]
-    public bool isHorrorMode; //해당 변수에 따라 리서치모드가 막힌다.
 
     private void Start()
     {
@@ -162,6 +161,7 @@ public class GameManager :  SingleTon<GameManager>
     public void SceneChange(string sceneName)
     {
         //씬 체인지
+        SceneManager.LoadScene(sceneName);
     }
 
 

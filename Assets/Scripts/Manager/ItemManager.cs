@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
@@ -24,7 +25,7 @@ public struct ItemInfo
 }
 
 
-public class ItemManager : SingleTon<ItemManager>
+public class ItemManager : SingleTon<ItemManager>, ISavable
 {
     //아이템 종류 및 인벤토리 소지 아이템 관리
     [SerializeField]
@@ -37,6 +38,12 @@ public class ItemManager : SingleTon<ItemManager>
 
    
     public ItemInfo curSetItem { get; private set; } //현재 장착 아이템
+
+
+    public void OnSave()
+    {
+        DataManager.Instance.data += JsonUtility.ToJson(inventoryItems);
+    }
 
     private void Awake()
     {

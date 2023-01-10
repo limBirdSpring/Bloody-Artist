@@ -7,6 +7,6 @@ public class SelectButton : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        TalkManager.Instance.curLogIndex+=2;
+        gameObject.SetActive(false);
     }
 }
