@@ -35,7 +35,7 @@ public class State_MiniGame : State
             {
                 punchButton.gameObject.SetActive(false);
                 action = false;
-                InputManager.Instance.ChangeState(StateName.Researching);
+                InputManager.Instance.ChangeState(StateName.BlockResearch);
                 
             }
             punch = 0;
