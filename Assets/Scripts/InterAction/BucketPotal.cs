@@ -19,13 +19,16 @@ public class BucketPotal : MonoBehaviour
 
     public void Potal()
     {
-        // ToDo : 믈끼얹는 소리 넣기
+        if (GameManager.Instance.IsCurCursor("Research"))
+        {
+            // ToDo : 믈끼얹는 소리 넣기
 
-        // 양동이 애니메이션 넣기
+            // 양동이 애니메이션 넣기
 
 
-        blackWaterColor.gameObject.SetActive(true);
-        StartCoroutine(SetPlayerPos());
+            blackWaterColor.gameObject.SetActive(true);
+            StartCoroutine(SetPlayerPos());
+        }
     }
 
     private IEnumerator SetPlayerPos()
