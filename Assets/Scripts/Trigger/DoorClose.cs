@@ -10,5 +10,6 @@ public class DoorClose : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         anim.SetBool("IsOpen", false);
+        Destroy(gameObject);
     }
 }

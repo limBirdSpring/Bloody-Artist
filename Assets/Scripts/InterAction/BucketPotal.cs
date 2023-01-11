@@ -17,6 +17,9 @@ public class BucketPotal : MonoBehaviour
     [SerializeField]
     private GameObject blackRoom;
 
+    [SerializeField]
+    private GameObject eyeCam;
+
     public void Potal()
     {
         if (GameManager.Instance.IsCurCursor("Research"))
@@ -35,8 +38,10 @@ public class BucketPotal : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         blackRoom.SetActive(true);
+        eyeCam.SetActive(true);
         player.transform.position = potal.position;
         yield return new WaitForSeconds(5f);
         blackWaterColor.gameObject.SetActive(false);
+
     }
 }
