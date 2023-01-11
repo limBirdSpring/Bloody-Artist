@@ -258,6 +258,17 @@ public class TalkManager : SingleTon<TalkManager>
         getTextUI.gameObject.SetActive(true);
     }
 
+
+    public void RenderText(string text)
+    {
+        SoundManager.Instance.UIAudioPlay(UISound.Good);
+        getTextUI.gameObject.SetActive(false);
+        getTextUI.color = new Color(32, 32, 32, 1);
+        getTextUI.text = text;
+        getTextUI.gameObject.SetActive(true);
+    }
+
+
     public void RenderGetExpText(string colorName)
     {
         getTextUI.gameObject.SetActive(false);

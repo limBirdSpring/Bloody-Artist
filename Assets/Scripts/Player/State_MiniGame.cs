@@ -36,6 +36,7 @@ public class State_MiniGame : State
                 punchButton.gameObject.SetActive(false);
                 action = false;
                 InputManager.Instance.ChangeState(StateName.BlockResearch);
+                TalkManager.Instance.RenderText("C o m p l e t e");
                 
             }
             punch = 0;
