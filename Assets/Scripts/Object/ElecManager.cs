@@ -25,6 +25,9 @@ public class ElecManager : SingleTon<ElecManager>
     [SerializeField]
     private GameObject all;
 
+    [SerializeField]
+    private ParticleSystem spark;
+
     private bool isOn;
 
 
@@ -57,6 +60,11 @@ public class ElecManager : SingleTon<ElecManager>
             half.SetActive(true);
             all.SetActive(false);
 
+            elecList.Add(null);
+            elecList.Add(null);
+            elecList.Add(null);
+            elecList.Add(null);
+
             if (elecList.Count == 4 && elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
             {
                 //만약 정답이라면
@@ -75,9 +83,14 @@ public class ElecManager : SingleTon<ElecManager>
                 all.SetActive(true);
 
                 //전기 공격 (파티클)
+                Instantiate(spark, transform.position, Quaternion.identity);
 
                 BloodManager.Instance.Hurt(5);
                 elecList.Clear();
+                elecList.Add(null);
+                elecList.Add(null);
+                elecList.Add(null);
+                elecList.Add(null);
             }
         }
     }
