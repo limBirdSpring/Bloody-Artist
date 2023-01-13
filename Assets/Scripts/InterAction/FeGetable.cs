@@ -7,6 +7,9 @@ public class FeGetable : MonoBehaviour
     [SerializeField]
     private GameObject fePill;
 
+    [SerializeField]
+    private Transform fePos;
+
     public void GetFe()
     {
         if (GameManager.Instance.IsCurCursor("RedGem"))
@@ -18,7 +21,7 @@ public class FeGetable : MonoBehaviour
                 for(int i=0;i<5;i++)
                     ItemManager.Instance.UsedItem("RedGem");
 
-                Instantiate(fePill, GetComponentInChildren<Transform>().position, GetComponentInChildren<Transform>().rotation);
+                StartCoroutine(Get());
             }
             else
             {
@@ -26,5 +29,12 @@ public class FeGetable : MonoBehaviour
                 TalkManager.Instance.ShowResearchText();
             }
         }
+    }
+
+    private IEnumerator Get()
+    {
+        yield return new WaitForSeconds(2f);
+        GameObject obj = Instantiate(fePill, fePos.position, Quaternion.identity);
+        obj.name = "FePill";
     }
 }

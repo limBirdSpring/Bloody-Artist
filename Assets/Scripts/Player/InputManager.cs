@@ -19,6 +19,7 @@ public enum StateName
     Block,
     MiniGame,
     BlockResearch,
+    Setting,
     Size,
 }
 
@@ -46,7 +47,8 @@ public class InputManager : SingleTon<InputManager>, ISavable
 
     private void Start()
     {
-        curState = allState[0].state;
+        //curState = allState[0].state;
+        ChangeState(StateName.Block);
     }
 
     private void Update()

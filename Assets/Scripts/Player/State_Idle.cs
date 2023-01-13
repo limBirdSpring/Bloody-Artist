@@ -79,6 +79,12 @@ public class State_Idle : State
             InputManager.Instance.ChangeState(StateName.Inventory);
         }
 
+        if (Input.GetButtonDown("Cancel"))//¼³Á¤
+        {
+            SoundManager.Instance.UIAudioPlay(UISound.ScreenOn);
+            footStep.gameObject.SetActive(false);
+            InputManager.Instance.ChangeState(StateName.Setting);
+        }
 
         if (Input.GetButtonDown("UsedKnife"))//Ä® »ç¿ë
         {

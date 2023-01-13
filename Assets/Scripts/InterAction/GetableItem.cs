@@ -17,9 +17,4 @@ public class GetableItem : MonoBehaviour
             OnInterAction?.Invoke();
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        GetComponent<AudioSource>().Play();
-    }
 }

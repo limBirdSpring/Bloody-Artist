@@ -22,6 +22,7 @@ public class DoorOpenable : MonoBehaviour
         {
             if (miniGame)
             {
+  
                 InputManager.Instance.ChangeState(StateName.MiniGame);
                 miniGame = false;
             }

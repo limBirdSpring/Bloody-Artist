@@ -16,6 +16,8 @@ public class DrinkableToPlayer : MonoBehaviour
             Debug.Log("철분제");
             ItemManager.Instance.UsedItem("FePill");
             BloodManager.Instance.SubTired(30);
+
+            TalkManager.Instance.EraseQuestText();
         }
 
         if (GameManager.Instance.IsCurCursor("Coffee"))//커서가 커피일때

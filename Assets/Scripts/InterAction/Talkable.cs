@@ -1,5 +1,7 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Talkable : MonoBehaviour
@@ -7,28 +9,18 @@ public class Talkable : MonoBehaviour
     [SerializeField]
     private Dialogue dialogue;
 
-    private int index = 0;
+    [SerializeField]
+    private CinemachineVirtualCamera cam;
 
     public void Talk()
     {
-        if(GameManager.Instance.IsCurCursor("Research"))//커서가 조사일때
+        if(GameManager.Instance.IsCurCursor("Research") && ItemManager.Instance.FindItem("LightKey"))
         {
-
-            if (index != 0)
-            {
-                if (dialogue.dialogue.Count > index && !TalkManager.Instance.isTexting)
-                    index++;
-                else if (dialogue.dialogue.Count <= index)
-                    index = 0;
-            }
-
+            TalkManager.Instance.cam = cam;
+            TalkManager.Instance.curLogIndex = 0;
             TalkManager.Instance.curDlog = dialogue;
-            TalkManager.Instance.Talk(index);
-
-
-            if (index == 0)
-                index++;
-
+            TalkManager.Instance.dEvent = null;
+            TalkManager.Instance.Talk();
 
         }
 

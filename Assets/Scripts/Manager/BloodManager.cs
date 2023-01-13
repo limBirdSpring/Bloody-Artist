@@ -113,6 +113,7 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
     //                        ªÛ√≥¿≤
     //==========================================================
 
+
     public void Hurt(int damage)
     {
         SoundManager.Instance.UIAudioPlay(UISound.Hurt);

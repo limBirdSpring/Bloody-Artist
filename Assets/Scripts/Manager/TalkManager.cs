@@ -1,3 +1,4 @@
+using Cinemachine;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 using static UnityEditor.Progress;
 using Color = UnityEngine.Color;
 using Image = UnityEngine.UI.Image;
+using UnityEngine.Events;
 
 public class TalkManager : SingleTon<TalkManager>
 {
@@ -38,12 +40,22 @@ public class TalkManager : SingleTon<TalkManager>
     [SerializeField]
     private TextMeshProUGUI dialogueText;
 
+    [SerializeField]
+    private Button dialogueButton;
+
+    [HideInInspector]
+    public CinemachineVirtualCamera cam;
+
+    [HideInInspector]
+    public UnityEvent dEvent = null;
+
 
     [SerializeField]
     private Button select;
 
 
-    public int curLogIndex { get; set; } = -1;
+    [HideInInspector]
+    public int curLogIndex = 0;
 
     public Dialogue curDlog;
 
@@ -63,6 +75,12 @@ public class TalkManager : SingleTon<TalkManager>
 
 
     public string researchText { get; set; }
+
+
+    //------------------------퀘스트 관련-----------------------
+
+    [SerializeField]
+    private TextMeshProUGUI questText;
 
 
 
@@ -104,85 +122,60 @@ public class TalkManager : SingleTon<TalkManager>
     //==========================================================
 
 
-    public void Talk(int i)
+    public void TalkButtonDown()
     {
+        if (!isTexting)
+            curLogIndex++;
+        Talk();
+    }
 
-        if (i==0) // 대화가 시작될때
+    public void Talk()
+    {
+        if (curLogIndex==0) // 대화가 시작될때
         {
+            cam.Priority = 20;
+
             //대화창 보이게하기
             talkCanvas.gameObject.SetActive(true);
 
             //대화모드
-            InputManager.Instance.ChangeState(StateName.BlockResearch);
+            InputManager.Instance.ChangeState(StateName.Talking);
         }
 
-        if (curDlog.dialogue.Count > i)
+        if (curDlog.dialogue.Count > curLogIndex)
         {
-            if (curDlog.dialogue[i].select == false)
+            Debug.Log(curLogIndex);
+            //if (curDlog.dialogue[curLogIndex].select == false)
             {
-                nameText.text = curDlog.dialogue[i].name;
-                TextFlow(dialogueText, curDlog.dialogue[i].log);
+                nameText.text = curDlog.dialogue[curLogIndex].name;
+                TextFlow(dialogueText, curDlog.dialogue[curLogIndex].log);
             }
-            else
-            {
-                select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[i].log;
-                select.gameObject.SetActive(true);
-            }
+            //else
+            //{
+            //    select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[curLogIndex].log;
+            //    select.gameObject.SetActive(true);
+            //}
         }
         else // 대화가 끝났을때
         {
-             talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
-             StartCoroutine(CanvasActive());
+            if (dEvent != null)
+            {
+                dEvent?.Invoke();
+                curLogIndex = 0;
+                talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
+                StartCoroutine(CanvasActive());
+            }
+            else
+            {
+                talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
+                StartCoroutine(CanvasActive());
+                curLogIndex = 0;
+                cam.Priority = 1;
+                //대화모드 해제
+                InputManager.Instance.ChangeState(StateName.Idle);
+            }
 
-             //대화모드 해제
-             InputManager.Instance.ChangeState(StateName.Idle);
         }
-
-
-
-        //if (curDlog.dialogue.Count > curLogIndex)
-        //{
-        //    if (select.gameObject.activeSelf == true && curDlog.dialogue[curLogIndex + 1].select == false)
-        //    {
-
-        //    }
-        //    else if (curLogIndex>=0&& curDlog.dialogue[curLogIndex+1].select == true)
-        //    {
-        //        select.GetComponentInChildren<TextMeshProUGUI>().text = curDlog.dialogue[curLogIndex+1].log;
-        //        select.gameObject.SetActive(true);
-        //        return;
-        //    }
-
-        //    if (!isTexting)
-        //    {
-        //        curLogIndex++;
-        //    }
-
-        //    if (talkCanvas.gameObject.activeSelf == false)
-        //    {
-        //        //대화창 보이게하기
-        //        talkCanvas.gameObject.SetActive(true);
-
-        //        //대화모드
-        //        InputManager.Instance.ChangeState(StateName.Talking);
-        //    }
-
-        //    SoundManager.Instance.UIAudioPlay(UISound.Next);
-
-        //    nameText.text = curDlog.dialogue[curLogIndex].name;
-        //    TextFlow(dialogueText, curDlog.dialogue[curLogIndex].log);
-
-        //}
-        //else if (!isTexting)
-        //{
-        //    talkCanvas.GetComponentInChildren<Animator>().SetTrigger("Close");
-        //    StartCoroutine(CanvasActive());
-
-        //    curLogIndex = -1;
-
-        //    //대화모드 해제
-        //    InputManager.Instance.ChangeState(StateName.Idle);
-        //}
 
 
     }
@@ -309,5 +302,20 @@ public class TalkManager : SingleTon<TalkManager>
     }
 
 
+    //==========================================================
+    //                      퀘스트 텍스트
+    //==========================================================
+
+
+    public void RenderQuestText(string text)
+    {
+        questText.text = text;
+        questText.gameObject.SetActive(true);
+    }
+
+    public void EraseQuestText()
+    {
+        questText.gameObject.SetActive(false);
+    }
 
 }
