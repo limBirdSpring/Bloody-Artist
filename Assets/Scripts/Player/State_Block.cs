@@ -9,6 +9,6 @@ public class State_Block : State
     public override void Action()
     {
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
-        Cursor.visible = true;
+        Cursor.visible = false;
     }
 }

@@ -87,7 +87,8 @@ public class GemGivable : MonoBehaviour
         cam.Priority = 1;
         //대화모드 해제
         InputManager.Instance.ChangeState(StateName.Idle);
-        Instantiate(key ,transform.position, transform.rotation);
+        GameObject obj = Instantiate(key ,transform.position, transform.rotation);
+        obj.name = "LightKey";
     }
 
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchControler : MonoBehaviour
+public class SwitchControler : SingleTon<SwitchControler>
 {
     [SerializeField]
     private Animator maskSwitch;
@@ -26,7 +26,7 @@ public class SwitchControler : MonoBehaviour
     private Animator yayoyiDoor;
 
 
-    private void Update()
+    public void SwitchUpdate()
     {
         if (hallSwitch.GetBool("IsOn"))
         {

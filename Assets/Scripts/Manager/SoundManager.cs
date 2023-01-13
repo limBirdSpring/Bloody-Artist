@@ -19,6 +19,7 @@ public enum UISound
     Hurt,
     Punch,
     Good,
+    GameOver,
     Size
 }
 

@@ -17,6 +17,7 @@ public class Switchable : MonoBehaviour
         {
             GetComponent<AudioSource>()?.Play();
             anim.SetBool("IsOn", !anim.GetBool("IsOn"));
+            SwitchControler.Instance.SwitchUpdate();
         }
     }
 

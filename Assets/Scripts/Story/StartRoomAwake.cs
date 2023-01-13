@@ -33,10 +33,10 @@ public class StartRoomAwake : MonoBehaviour
         GameManager.Instance.BloodyScene();
         TalkManager.Instance.RenderQuestText("윽! 상처가..");
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         TalkManager.Instance.EraseQuestText();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         TalkManager.Instance.RenderQuestText("너무 어둡다. 주변을 밝힐만한 게 없을까?");
 
         yield return new WaitForSeconds(7f);

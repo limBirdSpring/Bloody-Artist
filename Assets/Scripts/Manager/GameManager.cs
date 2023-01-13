@@ -28,6 +28,9 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private Image horrorImage;
 
+    [SerializeField]
+    private CinemachineVirtualCamera gameOverCam;
+
     private void Start()
     {
         Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);//기본 커서 이미지
@@ -154,8 +157,11 @@ public class GameManager :  SingleTon<GameManager>
 
     public void GameOver()
     {
+        SoundManager.Instance.UIAudioPlay(UISound.GameOver);
+        gameOverCam.Priority = 20;
+
         //게임오버 씬으로 전환
-        SceneChange("GameOver");
+        //SceneChange("GameOver");
     }
 
     public void SceneChange(string sceneName)

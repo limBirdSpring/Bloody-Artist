@@ -47,8 +47,8 @@ public class InputManager : SingleTon<InputManager>, ISavable
 
     private void Start()
     {
-        //curState = allState[0].state;
-        ChangeState(StateName.Block);
+        curState = allState[0].state;
+        //ChangeState(StateName.Block);
     }
 
     private void Update()
