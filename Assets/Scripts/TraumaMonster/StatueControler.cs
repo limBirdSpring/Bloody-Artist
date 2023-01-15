@@ -55,7 +55,7 @@ public class StatueControler : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other)
-    {
+    { 
         if (isMove && other.gameObject.name == "Player")
         {
             Debug.Log("트리거 충돌");
@@ -90,6 +90,7 @@ public class StatueControler : MonoBehaviour
         yield return new WaitForSeconds(2f);
         cam.Priority = 1;
         isMove = true;
+        yield return new WaitForSeconds(2f);
         curAttackCoroutine = null;
 
     }

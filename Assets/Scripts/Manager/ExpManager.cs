@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Cache;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ExpManager : SingleTon<ExpManager>
 {
     [SerializeField]
-    private List<Image> expUI = new List<Image>(); 
+    private List<Image> expUI = new List<Image>();
+
+    private List<string> haveExp = new List<string>();
 
     public void AddExp(string expColor)
     {
         //È¹µæ ÅØ½ºÆ® Ãâ·Â
         TalkManager.Instance.RenderGetExpText(expColor);
+        haveExp.Add(expColor);
+
 
         for(int i=0; i<expUI.Count;i++)
         {
@@ -19,6 +24,12 @@ public class ExpManager : SingleTon<ExpManager>
                 expUI[i].gameObject.SetActive(true);
         }
     }
+
+    public bool isExpHave(string expColor)
+    {
+        return haveExp.Contains(expColor);
+    }
+
 
     public void DeleteExp(string expColor)
     {

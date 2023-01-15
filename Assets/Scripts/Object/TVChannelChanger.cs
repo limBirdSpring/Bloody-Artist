@@ -28,7 +28,6 @@ public class TVChannelChanger : MonoBehaviour
 
     private void Awake()
     {
-        
         mash = GetComponent<MeshRenderer>();
     }
 
@@ -70,6 +69,7 @@ public class TVChannelChanger : MonoBehaviour
                     mash.material = art;
                     break;
             }
+            TVManager.Instance.CheckChannel();
         }
     }
 }

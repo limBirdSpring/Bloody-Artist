@@ -52,6 +52,9 @@ public class SwitchControler : SingleTon<SwitchControler>
 
             maskDoor.gameObject.GetComponent<AudioSource>().Play();
             maskDoor.SetBool("IsOpen", false);
+
+            if (GameManager.Instance.isRunMode)
+                GameManager.Instance.EndRunMode();
         }
 
         if (mediaSwitch.GetBool("IsOn"))
@@ -62,6 +65,8 @@ public class SwitchControler : SingleTon<SwitchControler>
             yayoyiDoor.SetBool("IsOpen", true);
 
             hallSwitch.SetBool("IsOn", false);
+
+
         }
         else if (!mediaSwitch.GetBool("IsOn"))
         {

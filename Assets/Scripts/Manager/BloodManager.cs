@@ -12,7 +12,8 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
     //---------------------[상처율]-----------------------
 
     //상처율 : 100이 넘으면 게임오버
-    private int hurtPercent = 20;
+    [HideInInspector]
+    public int hurtPercent { get; private set; } = 20;
 
     [SerializeField]
     private Image hurtSlide;//상처율 슬라이드

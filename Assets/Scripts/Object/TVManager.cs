@@ -47,18 +47,13 @@ public class TVManager : SingleTon<TVManager>
         ChangeChannel();
     }
 
-    private void Update()
-    {
-        //CheckChannel();
-    }
 
-    private void CheckChannel()
+    public void CheckChannel()
     {
         for (int i = 0; i < channelList.Count - 1; i++)
         {
             if (channelList[i].curChannel != channelList[i + 1].curChannel)
             {
-
                 Debug.Log(i);
                 return;
             }
@@ -97,6 +92,7 @@ public class TVManager : SingleTon<TVManager>
 
     private void ChangeChannel()
     {
+
         coroutine = StartCoroutine(Changer());
 
     }
@@ -127,7 +123,9 @@ public class TVManager : SingleTon<TVManager>
                     mash.material = art;
                     break;
             }
+            CheckChannel();
         }
+
     }
 
 

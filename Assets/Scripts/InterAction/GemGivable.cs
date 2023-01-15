@@ -51,9 +51,13 @@ public class GemGivable : MonoBehaviour
 
         if (gemFileName == "" && gemFileName2 == "")
         {
-            //밧줄이 사라지는 파티클
-            rope.SetActive(false);
+            GameManager.Instance.story++;
 
+            if (rope != null)
+            {
+                //밧줄이 사라지는 파티클
+                rope.SetActive(false);
+            }
             TalkManager.Instance.EraseQuestText();
 
             TalkManager.Instance.cam = cam;

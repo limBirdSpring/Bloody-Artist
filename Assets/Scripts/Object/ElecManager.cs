@@ -65,7 +65,7 @@ public class ElecManager : SingleTon<ElecManager>
             elecList.Add(null);
             elecList.Add(null);
 
-            if (elecList.Count == 4 && elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
+            if (elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
             {
                 //만약 정답이라면
                 SoundManager.Instance.UIAudioPlay(UISound.Good);
@@ -87,10 +87,6 @@ public class ElecManager : SingleTon<ElecManager>
 
                 BloodManager.Instance.Hurt(5);
                 elecList.Clear();
-                elecList.Add(null);
-                elecList.Add(null);
-                elecList.Add(null);
-                elecList.Add(null);
             }
         }
     }
