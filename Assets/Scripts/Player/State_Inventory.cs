@@ -32,7 +32,7 @@ public class State_Inventory : State
 
     private void ExitInventory()
     {
-        InvenCanvas.GetComponent<AudioSource>().Play();
+        SoundManager.Instance.UIAudioPlay(UISound.Inven);
         InvenCanvas.GetComponentInChildren<Animator>().SetTrigger("InvenClose");
         StartCoroutine(InvenCoroutine());
     }

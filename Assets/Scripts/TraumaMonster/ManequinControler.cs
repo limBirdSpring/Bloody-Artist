@@ -109,6 +109,7 @@ public class ManequinControler : MonoBehaviour
 
     public void DestroyObject()
     {
+        ExpManager.Instance.AddExp("Yellow");
          Destroy(gameObject);
         //사라질 때 파티클 생성
     }

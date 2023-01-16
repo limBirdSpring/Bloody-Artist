@@ -31,6 +31,21 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private CinemachineVirtualCamera gameOverCam;
 
+    [SerializeField]
+    private Image gameOverImg;
+
+    [SerializeField]
+    private Button gameOverButton;
+
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
+    private Transform loadPlayerPos;
+
+    [SerializeField]
+    private CinemachineBrain brain;
+
     [HideInInspector]
     public int story =0;
 
@@ -156,19 +171,54 @@ public class GameManager :  SingleTon<GameManager>
 
     }
 
-    public void GameOverCam()
+    StateName curState;
+
+    private IEnumerator GameOverCor()
     {
-        gameOverCam.Priority = 20;
+        gameOverCam.Priority = 30;
+        yield return new WaitForSeconds(2f);
+
+        //게임오버 화면 출력 후 시간 멈추기, 상태 블락 -> 버튼 누르면 원래대로
+        gameOverImg.gameObject.SetActive(true);
+        player.transform.position = loadPlayerPos.position;
+        brain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
+
+        curState = InputManager.Instance.GetCurState();
+
+        InputManager.Instance.ChangeState(StateName.Block);
+
+        //플레이어 위치 조정, 상처도, 피로도 조정
+        BloodManager.Instance.ResetBlood();
+
+        //버튼 띄우기
+        InputManager.Instance.ChangeState(StateName.BlockResearch);
+        gameOverButton.gameObject.SetActive(true);
+        gameOverCam.Priority = 1;
+        Time.timeScale = 0;
     }
+
 
     public void GameOver()
     {
         SoundManager.Instance.UIAudioPlay(UISound.GameOver);
-        GameOverCam();
+        StartCoroutine(GameOverCor());
 
-        //게임오버 씬으로 전환
-        //SceneChange("GameOver");
     }
+
+    public void GameOverButton()
+    {
+        Time.timeScale = 1;
+        brain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.EaseInOut;
+        gameOverImg.gameObject.SetActive(false);
+        StartCoroutine(ButtonCor());
+    }
+
+    private IEnumerator ButtonCor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        InputManager.Instance.ChangeState(curState);
+    }
+
 
     public void SceneChange(string sceneName)
     {

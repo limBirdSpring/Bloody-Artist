@@ -24,6 +24,9 @@ public class TVChannelChanger : MonoBehaviour
     [SerializeField]
     public Material error;
 
+    [SerializeField]
+    public Material stop;
+
 
 
     private void Awake()
@@ -47,7 +50,7 @@ public class TVChannelChanger : MonoBehaviour
         {
             GetComponent<AudioSource>().Play();
 
-            if (curChannel < 3)
+            if (curChannel < 4)
                 curChannel++;
             else
                 curChannel = 0;
@@ -67,6 +70,9 @@ public class TVChannelChanger : MonoBehaviour
                     break;
                 case 3:
                     mash.material = art;
+                    break;
+                case 4:
+                    mash.material = stop;
                     break;
             }
             TVManager.Instance.CheckChannel();

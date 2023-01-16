@@ -193,6 +193,15 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
         }
     }
 
+
+    public void ResetBlood()
+    {
+        hurtPercent = 40;
+        tiredPercent = 0;
+        hurtSlide.fillAmount = 0.4f;
+        tiredSlide.fillAmount = 0f;
+    }
+
     //==========================================================
     //                          ÇÇ °ü·Ã
     //==========================================================

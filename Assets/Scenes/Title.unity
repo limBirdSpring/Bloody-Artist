@@ -1896,7 +1896,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1719252662468895436, guid: 75dcc5047cdf7864ea9f1f47fcabbbd5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 18fb9e55a34e0cb4cb01986bb632e48e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b216b25751136de47bf575a633e6ee45, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2071,6 +2071,7 @@ MonoBehaviour:
   frontCam: {fileID: 0}
   horrorImage: {fileID: 0}
   gameOverCam: {fileID: 0}
+  story: 0
 --- !u!4 &1106101646
 Transform:
   m_ObjectHideFlags: 0

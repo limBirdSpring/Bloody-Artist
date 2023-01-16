@@ -36,7 +36,7 @@ public class Story_Mirror : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
-        GameManager.Instance.GameOverCam();
+       // 카메라 뒤로 넘어가기
 
         while(BloodManager.Instance.hurtPercent >=90)
         {

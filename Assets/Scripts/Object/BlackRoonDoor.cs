@@ -10,13 +10,19 @@ public class BlackRoonDoor : MonoBehaviour
     [SerializeField]
     private GameObject light;
 
+    [SerializeField]
+    private GameObject blackRoom;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Player")
         {
             light.SetActive(false);
+            InputManager.Instance.ChangeState(StateName.Block);
             other.transform.position = playerEndPos.position;
+            InputManager.Instance.ChangeState(StateName.Idle);
             ExpManager.Instance.AddExp("White");
+            blackRoom.SetActive(false);
         }
     }
 }
