@@ -36,7 +36,7 @@ public class State_Research : State
         //커서 레이캐스트
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 3))
+        if (Physics.Raycast(ray, out hit, 5))
         {
             //레이캐스트가 조사할 물건에 닿으면 진행해야하는 것
             Debug.DrawRay(ray.origin, ray.direction * 10, new Color(255, 1, 1, 1), 1);

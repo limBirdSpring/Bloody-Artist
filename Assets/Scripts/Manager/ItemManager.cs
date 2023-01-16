@@ -72,6 +72,7 @@ public class ItemManager : SingleTon<ItemManager>, ISavable
         GetItem("Black");
         GetItem("CardKey");
         GetItem("Photo");
+        GetItem("BlackGem");
         //-----------------------
     }
 

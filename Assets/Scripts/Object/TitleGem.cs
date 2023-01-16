@@ -8,6 +8,12 @@ public class TitleGem : MonoBehaviour
 {
 
     [SerializeField]
+    private GameObject logo;
+
+    [SerializeField]
+    private GameObject logoCanvas;
+
+    [SerializeField]
     private GameObject gem;
 
     [SerializeField]
@@ -39,8 +45,19 @@ public class TitleGem : MonoBehaviour
     private IEnumerator Gem()
     {
 
+        //로고 보여주기
+        yield return new WaitForSeconds(2f);
+        logo.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+
+        yield return new WaitForSeconds(7f);
+        logoCanvas.SetActive(false);
+        
+
+        //BGM재생
+        GetComponent<AudioSource>().Play();
+
+        yield return new WaitForSeconds(0.7f);
 
         elec.gameObject.SetActive(true);
 

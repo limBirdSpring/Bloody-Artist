@@ -43,8 +43,8 @@ public class GameManager :  SingleTon<GameManager>
     [SerializeField]
     private Transform loadPlayerPos;
 
-    [SerializeField]
-    private CinemachineBrain brain;
+
+    public CinemachineBrain brain;
 
     [HideInInspector]
     public int story =0;

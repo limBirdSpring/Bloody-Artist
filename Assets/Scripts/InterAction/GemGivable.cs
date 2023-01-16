@@ -30,6 +30,15 @@ public class GemGivable : MonoBehaviour
     [SerializeField]
     private GameObject rope;
 
+    [SerializeField]
+    private GameObject smoke;
+
+    [SerializeField]
+    private Canvas worldCanvas;
+
+    [SerializeField]
+    private AudioSource audio;
+
 
     public void GiveGem()
     {
@@ -51,11 +60,15 @@ public class GemGivable : MonoBehaviour
 
         if (gemFileName == "" && gemFileName2 == "")
         {
+
+
             GameManager.Instance.story++;
 
             if (rope != null)
             {
-                //밧줄이 사라지는 파티클
+                //밧줄이 사라지는 소리
+                
+               
                 rope.SetActive(false);
             }
             TalkManager.Instance.EraseQuestText();
@@ -74,25 +87,33 @@ public class GemGivable : MonoBehaviour
     public void LightOn()
     {
         light.gameObject.SetActive(true);
-
-        //마네킹이 사라지는 파티클
-        Destroy(gameObject);
+        
         cam.Priority = 1;
         //대화모드 해제
         InputManager.Instance.ChangeState(StateName.Idle);
+        Instantiate(smoke, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
     }
 
     public void OldManLightOn()
     {
         light.gameObject.SetActive(true);
-
-        //마네킹이 사라지는 파티클
-        Destroy(gameObject);
         cam.Priority = 1;
+
         //대화모드 해제
         InputManager.Instance.ChangeState(StateName.Idle);
+
         GameObject obj = Instantiate(key ,transform.position, transform.rotation);
         obj.name = "LightKey";
+
+        Instantiate(smoke, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
+        worldCanvas.gameObject.SetActive(true);
+
+
+
     }
 
 

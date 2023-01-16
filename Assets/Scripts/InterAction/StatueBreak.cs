@@ -7,6 +7,9 @@ public class StatueBreak : MonoBehaviour
     [SerializeField]
     private GameObject amber;
 
+    [SerializeField]
+    private GameObject particle;
+
     private bool miniGame = true;
 
     public void Break()
@@ -25,6 +28,8 @@ public class StatueBreak : MonoBehaviour
                 {
                     amber.SetActive(true);
                 }
+
+                Instantiate(particle, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 InputManager.Instance.ChangeState(StateName.Idle);
             }

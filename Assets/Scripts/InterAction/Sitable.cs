@@ -32,6 +32,7 @@ public class Sitable : MonoBehaviour
     private IEnumerator SitCoroutine()
     {
         yield return new WaitForSeconds(3f);
+        BloodManager.Instance.Heal(10);
         GetComponent<AudioSource>().Play();
         InputManager.Instance.ChangeState(StateName.Idle);
         cam.Priority = 1;
