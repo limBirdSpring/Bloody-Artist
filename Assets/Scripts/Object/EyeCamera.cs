@@ -10,6 +10,13 @@ public class EyeCamera : SingleTon<EyeCamera>
     [SerializeField]
     private GameObject door;
 
+
+    [SerializeField]
+    private AudioSource audio;
+
+    [SerializeField]
+    private AudioClip clip;
+
     public bool horrorOn { get; private set; } = false;
 
     private Coroutine coroutine;
@@ -26,6 +33,9 @@ public class EyeCamera : SingleTon<EyeCamera>
         if (hp <= 0)
         {
             //군중소리/노래소리 변경
+            SoundManager.Instance.SetBgm(BGMSound.WhiteSilence_Red);
+
+            audio.clip = clip;
 
             StopCoroutine(coroutine);
             horrorOn = true;

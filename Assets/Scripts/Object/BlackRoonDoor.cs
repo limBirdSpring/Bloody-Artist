@@ -20,9 +20,17 @@ public class BlackRoonDoor : MonoBehaviour
             light.SetActive(false);
             InputManager.Instance.ChangeState(StateName.Block);
             other.transform.position = playerEndPos.position;
-            InputManager.Instance.ChangeState(StateName.Idle);
-            ExpManager.Instance.AddExp("White");
-            blackRoom.SetActive(false);
+
+            
         }
+    }
+
+    private IEnumerator TriggerCor()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        InputManager.Instance.ChangeState(StateName.Idle);
+        ExpManager.Instance.AddExp("White");
+        blackRoom.SetActive(false);
     }
 }

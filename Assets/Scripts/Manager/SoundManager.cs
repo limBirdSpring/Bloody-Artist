@@ -43,6 +43,7 @@ public enum BGMSound
     Ending,
     WhiteSilence,
     None,
+    WhiteSilence_Red,
 }
 
 [Serializable]

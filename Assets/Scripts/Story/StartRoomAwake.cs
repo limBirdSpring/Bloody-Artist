@@ -18,6 +18,7 @@ public class StartRoomAwake : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
+        GameManager.Instance.brain.m_DefaultBlend.m_Time = 2f;
         GetComponent<AudioSource>().Play();
 
 
@@ -32,6 +33,8 @@ public class StartRoomAwake : MonoBehaviour
         SoundManager.Instance.UIAudioPlay(UISound.Hurt);
         GameManager.Instance.BloodyScene();
         TalkManager.Instance.RenderQuestText("¿π! ªÛ√≥∞°..");
+
+        GameManager.Instance.brain.m_DefaultBlend.m_Time = 0.5f;
 
         yield return new WaitForSeconds(2f);
         TalkManager.Instance.EraseQuestText();
