@@ -89,20 +89,43 @@ public class SoundManager : SingleTon<SoundManager>
         uiAudio.Play();
     }
 
-    public void SetBgm(BGMSound name)
+    public void SetBgm(BGMSound name, float time = 0.5f)
     {
+        if (name == curBGM)
+            return;
+
+        AudioClip clip = null;
 
         for (int i = 0; i < bgms.Count; i++)
         {
             if (bgms[i].bgmSound == name)
             {
-                bgmAudio.clip = bgms[i].clip;
+                clip = bgms[i].clip;
                 curBGM = name;
             }
-            bgmAudio.Play();
+           
+        }
+        //점점 소리 줄이기
+        StartCoroutine(FadeCor(clip, time));
+
+    }
+
+    private IEnumerator FadeCor(AudioClip clip, float time)
+    {
+        while (bgmAudio.volume > 0.1f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            bgmAudio.volume -= 1 / (time / 0.01f);
         }
 
+        yield return new WaitForSeconds(0.2f);
+        bgmAudio.clip = clip;
+        bgmAudio.Play();
 
-        //TODO : BGM fade 기능 구현
+        while (bgmAudio.volume < 0.99f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            bgmAudio.volume += 1 / (time / 0.01f);
+        }
     }
 }

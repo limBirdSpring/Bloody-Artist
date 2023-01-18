@@ -85,15 +85,9 @@ public class Story_Mirror : MonoBehaviour
 
         //쓰러지는 소리 출력
 
+        SoundManager.Instance.SetBgm(BGMSound.None);
 
-        yield return new WaitForSeconds(3f);
-
-
-        //글 출력
-
-
-
-
+        yield return new WaitForSeconds(20f);
 
         //엔딩화면으로
         GameManager.Instance.SceneChange("Ending");
