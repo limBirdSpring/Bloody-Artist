@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +19,10 @@ public class InvenItemImage : MonoBehaviour
 
     private void OnEnable()
     {
+        GetComponent<Image>().enabled = false;
+        itemImgWindow.color = Color.white;
         itemImgWindow.sprite = null;
+
         num.text = "";
         if (ItemManager.Instance.inventoryItems.Count > invenNum)
         {
@@ -29,6 +30,7 @@ public class InvenItemImage : MonoBehaviour
             {
                 num.text = ItemManager.Instance.inventoryItems[invenNum].num.ToString();
             }
+            GetComponent<Image>().enabled = true;
             itemImgWindow.sprite = ItemManager.Instance.inventoryItems[invenNum].sprite;
         }
         

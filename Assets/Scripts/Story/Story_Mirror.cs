@@ -9,6 +9,9 @@ public class Story_Mirror : MonoBehaviour
     private CinemachineVirtualCamera backCam;
 
     [SerializeField]
+    private CinemachineVirtualCamera gameOverCam;
+
+    [SerializeField]
     private GameObject artist;
 
     [SerializeField]
@@ -16,6 +19,9 @@ public class Story_Mirror : MonoBehaviour
 
     [SerializeField]
     private AudioSource audio;
+
+    [SerializeField]
+    private GameObject fade;
 
     public void MirrorStory()
     {
@@ -31,7 +37,14 @@ public class Story_Mirror : MonoBehaviour
     }
     private IEnumerator StoryCoroutine()
     {
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(1f);
+
+        //뒤에서 큰소리가 남 (문닫히는소리)
+        SwitchControler.Instance.hallSwitch.SetBool("isOn", false);
+        SwitchControler.Instance.SwitchUpdate();
+
+        yield return new WaitForSeconds(3f);
 
         InputManager.Instance.ChangeState(StateName.Block);
 
@@ -39,29 +52,50 @@ public class Story_Mirror : MonoBehaviour
         backCam.Priority = 20;
         yield return new WaitForSeconds(2f);
 
-        artist.SetActive(false);
+        artist.transform.Translate(Vector3.back * 200 * Time.deltaTime);
         mirror.SetActive(true);
-
-        yield return new WaitForSeconds(2f);
-
-        // 쿠궁 소리
-        GetComponent<AudioSource>().Play();
-        GameManager.Instance.brain.m_DefaultBlend.m_Time = 0.5f;
-        backCam.Priority = 1;
 
         yield return new WaitForSeconds(5f);
 
-        while(BloodManager.Instance.hurtPercent <=99)
+        // 쿠궁 소리
+
+        GameManager.Instance.brain.m_DefaultBlend.m_Time = 0.5f;
+        backCam.Priority = 1;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<AudioSource>().Play();
+
+
+        yield return new WaitForSeconds(5f);
+        GameManager.Instance.brain.m_DefaultBlend.m_Time = 2f;
+        gameOverCam.Priority = 30;
+
+        while (BloodManager.Instance.hurtPercent <90)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
             BloodManager.Instance.Hurt(10);
         }
 
         // 카메라 뒤로 넘어가기
+        yield return new WaitForSeconds(2f);
 
         //화면 페이드
+        fade.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        //쓰러지는 소리 출력
+
+
+        yield return new WaitForSeconds(3f);
+
 
         //글 출력
 
+
+
+
+
+        //엔딩화면으로
+        GameManager.Instance.SceneChange("Ending");
     }
 }

@@ -57,22 +57,26 @@ public class ItemManager : SingleTon<ItemManager>, ISavable
         inventoryItems.Add(items[0]);//조사는 기본 장착
 
         //게임 테스트용 아이템 얻기
-        GetItem("Knife");
-        GetItem("MyStatue");
-        GetItem("PaintBallGun");
-        GetItem("PaintRoller");
-        GetItem("LightKey");
-        GetItem("Red");
-        GetItem("Red");
-        GetItem("Blue");
-        GetItem("Blue");
-        GetItem("Green");
-        GetItem("Green");
-        GetItem("Black");
-        GetItem("Black");
-        GetItem("CardKey");
-        GetItem("Photo");
+      GetItem("Knife");
+      //GetItem("MyStatue");
+      GetItem("PaintBallGun");
+      //GetItem("PaintRoller");
+      GetItem("LightKey");
+      //GetItem("Red");
+      //GetItem("Red");
+      //GetItem("Blue");
+      //GetItem("Blue");
+      //GetItem("Green");
+      //GetItem("Green");
+      //GetItem("Black");
+      //GetItem("Black");
+      GetItem("CardKey");
+      GetItem("Photo");
         GetItem("BlackGem");
+
+
+        ExpManager.Instance.AddExp("Pink");
+        ExpManager.Instance.AddExp("Yellow");
         //-----------------------
     }
 

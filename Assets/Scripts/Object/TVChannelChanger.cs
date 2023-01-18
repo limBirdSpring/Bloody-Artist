@@ -46,7 +46,7 @@ public class TVChannelChanger : MonoBehaviour
     public void ChangeChannel()
     {
         //리모콘이 있을 때
-        if (GameManager.Instance.IsCurCursor("RemotCon") && curChannel < 4)//커서가 리모콘일때
+        if (GameManager.Instance.IsCurCursor("RemotCon") && curChannel < 5)//커서가 리모콘일때
         {
             GetComponent<AudioSource>().Play();
 

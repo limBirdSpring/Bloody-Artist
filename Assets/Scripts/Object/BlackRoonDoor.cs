@@ -21,7 +21,7 @@ public class BlackRoonDoor : MonoBehaviour
             InputManager.Instance.ChangeState(StateName.Block);
             other.transform.position = playerEndPos.position;
 
-            
+            StartCoroutine(TriggerCor());
         }
     }
 
@@ -31,6 +31,7 @@ public class BlackRoonDoor : MonoBehaviour
 
         InputManager.Instance.ChangeState(StateName.Idle);
         ExpManager.Instance.AddExp("White");
+
         blackRoom.SetActive(false);
     }
 }

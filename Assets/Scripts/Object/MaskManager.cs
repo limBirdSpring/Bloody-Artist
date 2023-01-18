@@ -27,7 +27,7 @@ public class MaskManager : SingleTon<MaskManager>
         {
             InputManager.Instance.ChangeState(StateName.Block);
             cam.Priority = 20;
-           
+            StartCoroutine(TakeCoroutine());
         }
         else if (GameManager.Instance.IsCurCursor("Research"))
         {
@@ -41,7 +41,7 @@ public class MaskManager : SingleTon<MaskManager>
         yield return new WaitForSeconds(2f);
 
         GetComponent<AudioSource>().Play();
-        StartCoroutine(TakeCoroutine());
+        
 
         yield return new WaitForSeconds(2f);
 

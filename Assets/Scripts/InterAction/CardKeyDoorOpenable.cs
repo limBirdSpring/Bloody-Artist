@@ -13,6 +13,7 @@ public class CardKeyDoorOpenable : MonoBehaviour
         if (GameManager.Instance.IsCurCursor("CardKey"))
         {
             GetComponent<AudioSource>()?.Play();
+            anim.gameObject.GetComponent<AudioSource>()?.Play();
             anim.SetTrigger("Open");
         }
     }

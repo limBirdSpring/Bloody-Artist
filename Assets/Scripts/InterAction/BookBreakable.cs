@@ -9,6 +9,9 @@ public class BookBreakable : MonoBehaviour
     [SerializeField]
     private Sitable sit;
 
+    [SerializeField]
+    private GameObject particle;
+
     public void Break()
     {
         if (ItemManager.Instance.curSetItem.fileName == "Research")
@@ -25,6 +28,7 @@ public class BookBreakable : MonoBehaviour
                 GetComponent<AudioSource>()?.Play();
                 InputManager.Instance.ChangeState(StateName.Idle);
                 sit.isExpGetable = true;
+                Instantiate(particle, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
 

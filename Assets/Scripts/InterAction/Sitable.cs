@@ -24,6 +24,7 @@ public class Sitable : MonoBehaviour
         {
             GetComponent<AudioSource>().Play();
             InputManager.Instance.ChangeState(StateName.Block);
+            GameManager.Instance.brain.m_DefaultBlend.m_Time = 2f;
             cam.Priority = 20;
             StartCoroutine(SitCoroutine());
         }
@@ -36,11 +37,15 @@ public class Sitable : MonoBehaviour
         GetComponent<AudioSource>().Play();
         InputManager.Instance.ChangeState(StateName.Idle);
         cam.Priority = 1;
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.brain.m_DefaultBlend.m_Time = 0.5f;
 
         if (isExpGetable)
         {
             ExpManager.Instance.AddExp("Green");
+            anim.gameObject.GetComponent<AudioSource>().Play();
             anim.SetBool("IsOpen", true);
+            anim2.gameObject.GetComponent<AudioSource>().Play();
             anim2.SetBool("IsOpen", true);
             isExpGetable = false;
         }

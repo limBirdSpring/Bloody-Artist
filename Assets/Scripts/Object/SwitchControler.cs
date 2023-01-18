@@ -10,11 +10,9 @@ public class SwitchControler : SingleTon<SwitchControler>
     [SerializeField]
     private Animator mediaSwitch;
 
-    [SerializeField]
-    private Animator hallSwitch;
+    public Animator hallSwitch;
 
-    [SerializeField]
-    private Animator hallDoor;
+    public Animator hallDoor;
 
     [SerializeField]
     private Animator maskDoor;

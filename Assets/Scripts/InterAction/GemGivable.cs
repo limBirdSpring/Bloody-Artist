@@ -10,7 +10,13 @@ public class GemGivable : MonoBehaviour
     private string gemFileName = "";
 
     [SerializeField]
+    private GameObject gemImage = null;
+
+    [SerializeField]
     private string gemFileName2 = "";
+
+    [SerializeField]
+    private GameObject gemImage2 = null;
 
     [SerializeField]
     private Dialogue dLog;
@@ -47,11 +53,19 @@ public class GemGivable : MonoBehaviour
             ItemManager.Instance.UsedItem(gemFileName);
             gemFileName = "";
 
+            SoundManager.Instance.UIAudioPlay(UISound.Good);
+            if (gemImage!=null)
+                gemImage.SetActive(true);
+
         }
         else if (gemFileName != "" && GameManager.Instance.IsCurCursor(gemFileName2))
         {
             ItemManager.Instance.UsedItem(gemFileName2);
             gemFileName = "";
+
+            SoundManager.Instance.UIAudioPlay(UISound.Good);
+            if (gemImage2 != null)
+                gemImage2.SetActive(true);
         }
         else if (!GameManager.Instance.IsCurCursor("Research"))
         {
