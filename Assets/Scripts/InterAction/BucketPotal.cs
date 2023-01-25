@@ -24,11 +24,9 @@ public class BucketPotal : MonoBehaviour
     {
         if (GameManager.Instance.IsCurCursor("Research"))
         {
-            // ToDo : 믈끼얹는 소리 넣기
-            GetComponent<AudioSource>().Play();
 
             // 양동이 애니메이션 넣기
-
+            GetComponent<Animator>().SetTrigger("Move");
 
             blackWaterColor.gameObject.SetActive(true);
             StartCoroutine(SetPlayerPos());

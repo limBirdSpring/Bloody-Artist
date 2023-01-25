@@ -50,22 +50,24 @@ public class GemGivable : MonoBehaviour
     {
         if (gemFileName!="" && GameManager.Instance.IsCurCursor(gemFileName))
         {
-            ItemManager.Instance.UsedItem(gemFileName);
-            gemFileName = "";
-
             SoundManager.Instance.UIAudioPlay(UISound.Good);
             if (gemImage!=null)
                 gemImage.SetActive(true);
 
-        }
-        else if (gemFileName != "" && GameManager.Instance.IsCurCursor(gemFileName2))
-        {
-            ItemManager.Instance.UsedItem(gemFileName2);
+            ItemManager.Instance.UsedItem(gemFileName);
             gemFileName = "";
+
+        }
+        else if (gemFileName2 != "" && GameManager.Instance.IsCurCursor(gemFileName2))
+        {
+
 
             SoundManager.Instance.UIAudioPlay(UISound.Good);
             if (gemImage2 != null)
                 gemImage2.SetActive(true);
+
+            ItemManager.Instance.UsedItem(gemFileName2);
+            gemFileName2 = "";
         }
         else if (!GameManager.Instance.IsCurCursor("Research"))
         {

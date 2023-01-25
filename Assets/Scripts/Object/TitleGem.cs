@@ -50,7 +50,7 @@ public class TitleGem : MonoBehaviour
         logo.SetActive(true);
 
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(9f);
         logoCanvas.SetActive(false);
         
 

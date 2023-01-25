@@ -31,13 +31,15 @@ public class ExpManager : SingleTon<ExpManager>
     }
 
 
-    public void DeleteExp(string expColor)
+    public void ClearExp()
     {
-        for (int i = 0; i < expUI.Count; i++)
+        haveExp.Clear();
+        for(int i=0;i<expUI.Count;i++)
         {
-            if (expUI[i].name == "ExpNote_" + expColor)
-                expUI[i].gameObject.SetActive(false);
+            expUI[i].gameObject.SetActive(false);
+
         }
+     
     }
 
     //버튼을 누르면 해당 UI가 가장 앞에 오게 만듬

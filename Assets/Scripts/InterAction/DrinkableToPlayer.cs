@@ -6,11 +6,12 @@ public class DrinkableToPlayer : MonoBehaviour
 {
     public void DrinkItem()
     {
-        Debug.Log(ItemManager.Instance.curSetItem.fileName);
-
-        //BloodManager.Instance.Hurt(10);
-
-        if (GameManager.Instance.IsCurCursor("FePill"))//커서가 철분제일때
+        if (GameManager.Instance.IsCurCursor("Research"))
+        {
+            TalkManager.Instance.researchText = "왼쪽이 상처율, 오른쪽이 피로도. 상처율 100%가 되면 죽는다. 그리고 피로도가 쌓이면 시야가 뿌얘지니 철분제로 관리해줘야지.";
+            TalkManager.Instance.ShowResearchText();
+        }
+        else if (GameManager.Instance.IsCurCursor("FePill"))//커서가 철분제일때
         {
             gameObject.GetComponent<AudioSource>().Play();
             Debug.Log("철분제");
@@ -19,8 +20,7 @@ public class DrinkableToPlayer : MonoBehaviour
 
             TalkManager.Instance.EraseQuestText();
         }
-
-        if (GameManager.Instance.IsCurCursor("Coffee"))//커서가 커피일때
+        else if (GameManager.Instance.IsCurCursor("Coffee"))//커서가 커피일때
         {
             gameObject.GetComponent<AudioSource>().Play();
             Debug.Log("커피");
@@ -29,6 +29,11 @@ public class DrinkableToPlayer : MonoBehaviour
             StartCoroutine(AddExpCoroutine());
             
         }
+
+
+
+
+
     }
 
     private IEnumerator AddExpCoroutine()

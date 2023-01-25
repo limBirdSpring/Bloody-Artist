@@ -35,7 +35,7 @@ public class ManequinControler : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
          Move();
         
@@ -50,7 +50,7 @@ public class ManequinControler : MonoBehaviour
 
             if (!GameManager.Instance.isRunMode)
             {
-                Destroy(gameObject);//전등 끄면 사라짐
+                DestroyObject();
             }
         }
     }
@@ -112,5 +112,15 @@ public class ManequinControler : MonoBehaviour
         ExpManager.Instance.AddExp("Yellow");
          Destroy(gameObject);
         //사라질 때 파티클 생성
+    }
+
+    public void Fast()
+    {
+        if (!GameManager.Instance.isRunMode)
+            return;
+
+        if (SoundManager.Instance.curBGM != BGMSound.RunFast)
+            SoundManager.Instance.SetBgm(BGMSound.RunFast);
+        agent.speed = 8;
     }
 }

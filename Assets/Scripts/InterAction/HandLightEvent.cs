@@ -14,7 +14,7 @@ public class HandLightEvent : MonoBehaviour
     {
         TalkManager.Instance.EraseQuestText();
         TalkManager.Instance.RenderText("C o m p l e t e");
-        light.intensity = 1.92f;
+        light.intensity = 1.5f;
         SoundManager.Instance.JustAudioPlay(clip);
         TalkManager.Instance.RenderQuestText("일어난 지 얼마 안되어서 어지럽다. 철분제는 어딨지..?");
     }

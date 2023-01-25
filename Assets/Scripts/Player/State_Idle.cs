@@ -94,6 +94,17 @@ public class State_Idle : State
             
         }
 
+        //ġƮŰ
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            ItemManager.Instance.GetItem("FePill");
+        }
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            if(BloodManager.Instance.hurtPercent >= 30)
+                 BloodManager.Instance.Heal(10);
+        }
+
     }
 
     private void PlayerRotate()

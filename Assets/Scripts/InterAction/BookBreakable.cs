@@ -25,13 +25,13 @@ public class BookBreakable : MonoBehaviour
             else
             {
                 //¿«¿⁄ø° æ…¿∏∏È ∞Ê«Ë »πµÊ ∞°¥…
-                GetComponent<AudioSource>()?.Play();
+                SoundManager.Instance.JustAudioPlay(GetComponent<AudioSource>().clip);
                 InputManager.Instance.ChangeState(StateName.Idle);
                 sit.isExpGetable = true;
                 Instantiate(particle, transform.position, Quaternion.identity);
                 Destroy(gameObject);
-            }
 
+            }
         }
     }
 }

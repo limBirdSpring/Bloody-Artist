@@ -1,7 +1,6 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Talkable : MonoBehaviour
@@ -14,7 +13,12 @@ public class Talkable : MonoBehaviour
 
     public void Talk()
     {
-        if(GameManager.Instance.IsCurCursor("Research") && ItemManager.Instance.FindItem("LightKey"))
+        if (!GameManager.Instance.IsCurCursor("Research"))
+        {
+            return;
+        }
+
+        else if(GameManager.Instance.IsCurCursor("Research") && ItemManager.Instance.FindItem("LightKey"))
         {
             TalkManager.Instance.cam = cam;
             TalkManager.Instance.curLogIndex = 0;

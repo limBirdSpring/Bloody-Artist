@@ -68,7 +68,7 @@ public class ElecManager : SingleTon<ElecManager>
             if (elecList[0] == green && elecList[1] == red && elecList[2] == blue && elecList[3] == black)
             {
                 //만약 정답이라면
-                SoundManager.Instance.UIAudioPlay(UISound.Good);
+                //SoundManager.Instance.UIAudioPlay(UISound.Good);
                 TVManager.Instance.ChangeTV();
                 isOn = true;
             }

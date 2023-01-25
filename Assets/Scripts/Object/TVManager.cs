@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class TVManager : SingleTon<TVManager>
@@ -61,7 +60,7 @@ public class TVManager : SingleTon<TVManager>
             if (i == channelList.Count - 2)
             {
 
-                if (curImage == channelList[i].curChannel)
+                if (curImage == channelList[i].curChannel && normalTV.activeSelf == true)
                 {
                     //모든 화면 바뀌고 자물쇠 열림
                     OpenCavinet();
@@ -133,6 +132,7 @@ public class TVManager : SingleTon<TVManager>
     {
         normalTV.GetComponentInChildren<TVChannelChanger>().curChannel = 3;
         normalTV.SetActive(true);
+        normalTV.GetComponent<AudioSource>().Play();
         dangerTV.SetActive(false);
     }
 }

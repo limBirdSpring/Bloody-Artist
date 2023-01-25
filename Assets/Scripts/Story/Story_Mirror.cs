@@ -23,6 +23,9 @@ public class Story_Mirror : MonoBehaviour
     [SerializeField]
     private GameObject fade;
 
+    [SerializeField]
+    private AudioClip fallDownClip;
+
     public void MirrorStory()
     {
         if (audio != null)
@@ -55,23 +58,24 @@ public class Story_Mirror : MonoBehaviour
         artist.transform.Translate(Vector3.back * 200 * Time.deltaTime);
         mirror.SetActive(true);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
-        // 쿠궁 소리
+     
 
         GameManager.Instance.brain.m_DefaultBlend.m_Time = 0.5f;
         backCam.Priority = 1;
         yield return new WaitForSeconds(0.5f);
         GetComponent<AudioSource>().Play();
+        yield return new WaitForSeconds(2f);
+        TalkManager.Instance.RenderText("이건.. 아니야. 그럴 리 없어!");
 
-
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         GameManager.Instance.brain.m_DefaultBlend.m_Time = 2f;
         gameOverCam.Priority = 30;
 
         while (BloodManager.Instance.hurtPercent <90)
         {
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
             BloodManager.Instance.Hurt(10);
         }
 
@@ -81,11 +85,13 @@ public class Story_Mirror : MonoBehaviour
         //화면 페이드
         fade.SetActive(true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         //쓰러지는 소리 출력
+        GetComponent<AudioSource>().clip = fallDownClip;
+        GetComponent<AudioSource>().Play();
 
-        SoundManager.Instance.SetBgm(BGMSound.None);
+        audio.Stop();
 
         yield return new WaitForSeconds(20f);
 

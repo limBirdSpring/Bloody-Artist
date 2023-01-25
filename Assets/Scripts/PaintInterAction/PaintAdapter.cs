@@ -9,6 +9,7 @@ public class PaintAdapter : MonoBehaviour
 
     public void PaintInteraction()
     {
+
         OnInterAction?.Invoke();
     }
 }

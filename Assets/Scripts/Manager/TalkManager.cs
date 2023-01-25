@@ -9,7 +9,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
-using static UnityEditor.Progress;
 using Color = UnityEngine.Color;
 using Image = UnityEngine.UI.Image;
 using UnityEngine.Events;
@@ -254,7 +253,6 @@ public class TalkManager : SingleTon<TalkManager>
 
     public void RenderText(string text)
     {
-        SoundManager.Instance.UIAudioPlay(UISound.Good);
         getTextUI.gameObject.SetActive(false);
         getTextUI.color = new Color(32, 32, 32, 1);
         getTextUI.text = text;

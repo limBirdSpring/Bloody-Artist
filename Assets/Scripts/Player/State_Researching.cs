@@ -6,6 +6,8 @@ public class State_Researching : State
 {
     public override void Action()
     {
+
+
         Cursor.lockState = CursorLockMode.None; //커서 락 해제
         Cursor.visible = true;
 

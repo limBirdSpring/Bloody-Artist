@@ -23,7 +23,7 @@ public class StatueBreak : MonoBehaviour
             }
             else
             {
-                GetComponent<AudioSource>().Play();
+                SoundManager.Instance.JustAudioPlay(GetComponent<AudioSource>().clip);
                 if (amber != null)
                 {
                     amber.SetActive(true);

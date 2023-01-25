@@ -22,8 +22,8 @@ public class FloorDoor : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         GetComponent<AudioSource>().Play();
-        yield return new WaitForSeconds(2f);
-        SoundManager.Instance.SetBgm(BGMSound.Playing);
+        yield return new WaitForSeconds(1f);
+        SoundManager.Instance.SetBgm(BGMSound.Playing,0);
 
         if (ExpManager.Instance.isExpHave("Yellow") && ExpManager.Instance.isExpHave("Pink"))
         {

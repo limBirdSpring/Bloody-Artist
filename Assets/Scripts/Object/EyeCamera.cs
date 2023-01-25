@@ -28,7 +28,7 @@ public class EyeCamera : SingleTon<EyeCamera>
 
     public void Hurt()
     {
-        hp -= 100;
+        hp -= 20;
 
         if (hp <= 0)
         {
@@ -36,6 +36,7 @@ public class EyeCamera : SingleTon<EyeCamera>
             SoundManager.Instance.SetBgm(BGMSound.WhiteSilence_Red);
 
             audio.clip = clip;
+            audio.volume = 0.6f;
 
             StopCoroutine(coroutine);
             horrorOn = true;
@@ -50,7 +51,7 @@ public class EyeCamera : SingleTon<EyeCamera>
         while (true)
         {
             yield return new WaitForSeconds(2f);
-            transform.position = new Vector3(Random.Range(-47,-26), 7f, Random.Range(199, 226));
+            transform.position = new Vector3(Random.Range(-47,-22), 7f, Random.Range(230, 255));
         }
     }
 }

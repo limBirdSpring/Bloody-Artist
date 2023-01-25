@@ -1,8 +1,8 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,14 +13,29 @@ public class GameManager :  SingleTon<GameManager>
 
     public bool isRunMode { get; private set; }//런모드 변경 (get,set)
 
+    //-----------------커서 관련----------------------
+
     [SerializeField]
     private Texture2D cursorImg;//커서이미지
 
     [SerializeField]
-    private Image bloodyScene;
+    private Texture2D researchCursor;
 
     [SerializeField]
-    private Image tiredScreen;
+    private Texture2D handCursor;
+
+    [SerializeField]
+    private Texture2D talkCursor;
+
+    //------------------------------------------------
+
+    [SerializeField]
+    private Image bloodyScene;
+
+    public PostProcessVolume tiredprofile;
+
+    [HideInInspector]
+    public DepthOfField tiredBlur;
 
     [SerializeField]
     private CinemachineVirtualCamera frontCam;
@@ -44,14 +59,38 @@ public class GameManager :  SingleTon<GameManager>
     private Transform loadPlayerPos;
 
 
+    //----------------게임스타트씬------------------
+
+    [SerializeField]
+    private GameObject gameCanvas;
+
+    [SerializeField]
+    private GameObject canvas;
+
+    [SerializeField]
+    private GameObject canvas2;
+
+    [SerializeField]
+    private GameObject blackCanvas;
+
+
+    //----------------------------------------------
+
+
     public CinemachineBrain brain;
 
     [HideInInspector]
     public int story =0;
 
+    private void Awake()
+    {
+        tiredprofile.sharedProfile.TryGetSettings<DepthOfField>(out tiredBlur);
+    }
+
     private void Start()
     {
         Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);//기본 커서 이미지
+        
     }
 
 
@@ -69,13 +108,32 @@ public class GameManager :  SingleTon<GameManager>
 
 
 
-
     //----------------------커서 변경------------------------
 
     public void CursorChange(Texture2D img)
     {
         Cursor.SetCursor(img, new Vector2((float)img.width*0.5f, (float)img.height*0.5f), CursorMode.ForceSoftware);
     }
+
+    public void CursorChange(string name)
+    {
+        switch(name)
+        {
+            case "normal":
+                CursorChange(cursorImg);
+                break;
+            case "research":
+                CursorChange(researchCursor);
+                break;
+            case "item":
+                CursorChange(handCursor);
+                break;
+            case "Talk":
+                CursorChange(talkCursor);
+                break;
+        }
+    }
+
 
     //현재 커서가 입력한 아이템 이름의 커서인가?
     public bool IsCurCursor(string fileName)
@@ -95,13 +153,13 @@ public class GameManager :  SingleTon<GameManager>
     public void StartRunMode()
     {
         isRunMode = true;
-        SoundManager.Instance.SetBgm(BGMSound.Run);
+        SoundManager.Instance.SetBgm(BGMSound.Run, 0);
     }
 
     public void EndRunMode()
     {
         isRunMode = false;
-        SoundManager.Instance.SetBgm(BGMSound.Playing);
+        SoundManager.Instance.SetBgm(BGMSound.Playing, 0);
     }
 
 
@@ -146,37 +204,49 @@ public class GameManager :  SingleTon<GameManager>
         StartCoroutine(BlindCoroutine(goal));
     }
 
-    private IEnumerator BlindCoroutine(float goal)
-    {
-        if (tiredScreen.color.a < goal)
-        {
-            for(float i= tiredScreen.color.a; i < goal ; i+=0.01f)
-            {
-                //증가
-                yield return new WaitForSeconds(0.1f);
-                Color color = new Color(255, 255, 255, i);
-                tiredScreen.color = color;
-            }
-        }
-        else
-        {
-            for (float i = tiredScreen.color.a; i > goal; i -= 0.01f)
-            {
+   private IEnumerator BlindCoroutine(float goal)
+   {
+        Debug.Log("골 : " + goal);
+
+        if (tiredBlur.focalLength.value < goal)
+       {
+            while (tiredBlur.focalLength.value < goal )
+           {
+               //증가
+               yield return new WaitForSeconds(0.1f);
+               tiredBlur.focalLength.value += 1;
+           }
+       }
+       else
+       {
+           while( tiredBlur.focalLength.value > goal)
+           {
+                Debug.Log("블러 : " + tiredBlur.focalLength.value);
                 //감소
                 yield return new WaitForSeconds(0.1f);
-                Color color = new Color(255, 255, 255, i);
-                tiredScreen.color = color;
-            }
-        }
-
-    }
+               tiredBlur.focalLength.value -= 1;
+           }
+       }
+   
+   }
 
     StateName curState;
+    BGMSound curBGM;
+
+    public void GameOver()
+    {
+        curBGM = SoundManager.Instance.curBGM;
+        SoundManager.Instance.SetBgm(BGMSound.None, 0);
+        SoundManager.Instance.UIAudioPlay(UISound.GameOver);
+        StartCoroutine(GameOverCor());
+
+    }
 
     private IEnumerator GameOverCor()
     {
         gameOverCam.Priority = 30;
         yield return new WaitForSeconds(2f);
+        SoundManager.Instance.UIAudioPlay(UISound.FallDown);
 
         //게임오버 화면 출력 후 시간 멈추기, 상태 블락 -> 버튼 누르면 원래대로
         gameOverImg.gameObject.SetActive(true);
@@ -190,20 +260,15 @@ public class GameManager :  SingleTon<GameManager>
         //플레이어 위치 조정, 상처도, 피로도 조정
         BloodManager.Instance.ResetBlood();
 
+        yield return new WaitForSeconds(1f);
+
         //버튼 띄우기
         InputManager.Instance.ChangeState(StateName.BlockResearch);
         gameOverButton.gameObject.SetActive(true);
-        gameOverCam.Priority = 1;
+        yield return new WaitForSeconds(0.5f);
         Time.timeScale = 0;
     }
 
-
-    public void GameOver()
-    {
-        SoundManager.Instance.UIAudioPlay(UISound.GameOver);
-        StartCoroutine(GameOverCor());
-
-    }
 
     public void GameOverButton()
     {
@@ -216,6 +281,8 @@ public class GameManager :  SingleTon<GameManager>
     private IEnumerator ButtonCor()
     {
         yield return new WaitForSeconds(0.5f);
+        gameOverCam.Priority = 1;
+        SoundManager.Instance.SetBgm(curBGM, 0);
         InputManager.Instance.ChangeState(curState);
     }
 
@@ -226,6 +293,32 @@ public class GameManager :  SingleTon<GameManager>
         SceneManager.LoadScene(sceneName);
     }
 
+
+
+    public void StartGameScene()
+    {
+        StartCoroutine(LoadSceneNow());
+    }
+
+    private IEnumerator LoadSceneNow()
+    {
+
+        yield return new WaitForSeconds(3f);
+        canvas.SetActive(true);
+        gameCanvas.SetActive(false);
+        yield return new WaitForSeconds(5f);
+        canvas2.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        //화면 검게
+        blackCanvas.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.SceneChange("MainMap");
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
 
 }
 

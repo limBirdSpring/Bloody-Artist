@@ -11,7 +11,7 @@ public class ArtistMusicOn : MonoBehaviour
     {
         if(other.gameObject.name == "Player")
         {
-            SoundManager.Instance.SetBgm(BGMSound.Classic);
+            SoundManager.Instance.SetBgm(BGMSound.Classic, 0);
             redBgm.Play();
             Destroy(gameObject);
             

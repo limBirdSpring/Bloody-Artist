@@ -31,7 +31,7 @@ public class BlackRoonDoor : MonoBehaviour
 
         InputManager.Instance.ChangeState(StateName.Idle);
         ExpManager.Instance.AddExp("White");
-
+        SoundManager.Instance.SetBgm(BGMSound.Playing);
         blackRoom.SetActive(false);
     }
 }

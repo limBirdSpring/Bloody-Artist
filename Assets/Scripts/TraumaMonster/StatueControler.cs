@@ -21,13 +21,16 @@ public class StatueControler : MonoBehaviour
 
     private Coroutine curAttackCoroutine = null;
 
+    [SerializeField]
+    private bool traumaMonster = false;
+
 
     private void OnEnable()
     {
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
     }
@@ -41,7 +44,7 @@ public class StatueControler : MonoBehaviour
 
             if (!GameManager.Instance.isRunMode)
             {
-                Destroy(gameObject);//전등 끄면 사라짐
+                DestroyObject();
             }
         }
     }
@@ -56,7 +59,7 @@ public class StatueControler : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     { 
-        if (isMove && other.gameObject.name == "Player")
+        if (isMove && other.gameObject.name == "Player" && traumaMonster)
         {
             Debug.Log("트리거 충돌");
             if (curAttackCoroutine == null)
@@ -100,5 +103,15 @@ public class StatueControler : MonoBehaviour
         ExpManager.Instance.AddExp("Blue");
         Destroy(gameObject);
         //사라질 때 파티클 생성
+    }
+
+    public void Fast()
+    {
+        if (!GameManager.Instance.isRunMode)
+            return;
+
+        if (SoundManager.Instance.curBGM != BGMSound.RunFast)
+            SoundManager.Instance.SetBgm(BGMSound.RunFast, 0);
+        agent.speed = 8;
     }
 }

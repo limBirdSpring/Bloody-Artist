@@ -5,8 +5,7 @@ using UnityEngine;
 public class Researchable : MonoBehaviour
 {
 
-    [SerializeField]
-    private string text;
+    public string text;
 
     public void Research()
     {

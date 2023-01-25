@@ -28,6 +28,9 @@ public class Drawable : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera cam;
 
+    [SerializeField]
+    private Researchable researchable;
+
 
     private void Awake()
     {
@@ -69,6 +72,8 @@ public class Drawable : MonoBehaviour
                     statue.GetComponent<Rigidbody>().AddForce(transform.forward * -5, ForceMode.Impulse);
                     curCoroutine = StartCoroutine(HorrorCoroutine());
                     step++;
+
+                    researchable.text = "완성된 그림이다.";
                 }
             }
             else

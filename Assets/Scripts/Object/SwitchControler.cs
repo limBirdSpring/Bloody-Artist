@@ -43,6 +43,7 @@ public class SwitchControler : SingleTon<SwitchControler>
             maskDoor.SetBool("IsOpen", true);
 
             hallSwitch.SetBool("IsOn", false);
+            hallDoor.SetBool("IsOpen", false);
 
         }
         else if (!maskSwitch.GetBool("IsOn"))
@@ -63,6 +64,7 @@ public class SwitchControler : SingleTon<SwitchControler>
             yayoyiDoor.SetBool("IsOpen", true);
 
             hallSwitch.SetBool("IsOn", false);
+            hallDoor.SetBool("IsOpen", false);
 
 
         }

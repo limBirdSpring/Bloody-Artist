@@ -3,12 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 
 //주의! 아이템 담는 List 절대 수정하지 않기
@@ -25,7 +22,7 @@ public struct ItemInfo
 }
 
 
-public class ItemManager : SingleTon<ItemManager>, ISavable
+public class ItemManager : SingleTon<ItemManager>
 {
     //아이템 종류 및 인벤토리 소지 아이템 관리
     [SerializeField]
@@ -40,10 +37,6 @@ public class ItemManager : SingleTon<ItemManager>, ISavable
     public ItemInfo curSetItem { get; private set; } //현재 장착 아이템
 
 
-    public void OnSave()
-    {
-        DataManager.Instance.data += JsonUtility.ToJson(inventoryItems);
-    }
 
     private void Awake()
     {
@@ -56,27 +49,35 @@ public class ItemManager : SingleTon<ItemManager>, ISavable
         curSetItem = items[0];//빈 아이템
         inventoryItems.Add(items[0]);//조사는 기본 장착
 
+        GameManager.Instance.tiredBlur.focalLength.value = 30;
+
         //게임 테스트용 아이템 얻기
-      GetItem("Knife");
-      //GetItem("MyStatue");
-      GetItem("PaintBallGun");
-      //GetItem("PaintRoller");
-      GetItem("LightKey");
-      //GetItem("Red");
-      //GetItem("Red");
-      //GetItem("Blue");
-      //GetItem("Blue");
-      //GetItem("Green");
-      //GetItem("Green");
-      //GetItem("Black");
-      //GetItem("Black");
-      GetItem("CardKey");
-      GetItem("Photo");
-        GetItem("BlackGem");
+        //GetItem("Knife");
+        //GetItem("MyStatue");
+        //GetItem("PaintBallGun");
+        //GetItem("PaintRoller");
+        //GetItem("LightKey");
+        //GetItem("Red");
+        //GetItem("Red");
+        //GetItem("Blue");
+        //GetItem("Blue");
+        //GetItem("Green");
+        //GetItem("Green");
+        //GetItem("Black");
+        //GetItem("Black");
+        //GetItem("CardKey");
+        //GetItem("Photo");
+        // GetItem("BlackGem");
+        //GetItem("PinkGem");
+        //GetItem("YellowGem");
+        //GetItem("BlueGem");
+        //GetItem("GreenGem");
+        //GetItem("WhiteGem");
+        //GameManager.Instance.story = 4;
 
 
-        ExpManager.Instance.AddExp("Pink");
-        ExpManager.Instance.AddExp("Yellow");
+        //ExpManager.Instance.AddExp("Pink");
+        //ExpManager.Instance.AddExp("Yellow");
         //-----------------------
     }
 

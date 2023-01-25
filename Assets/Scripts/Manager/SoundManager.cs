@@ -20,6 +20,7 @@ public enum UISound
     Punch,
     Good,
     GameOver,
+    FallDown,
     Size
 }
 
@@ -44,6 +45,7 @@ public enum BGMSound
     WhiteSilence,
     None,
     WhiteSilence_Red,
+    Size
 }
 
 [Serializable]

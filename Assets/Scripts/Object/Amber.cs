@@ -23,7 +23,7 @@ public class Amber : MonoBehaviour
 
     private IEnumerator TraumaCoroutine()
     {
-        SoundManager.Instance.SetBgm(BGMSound.None);
+        SoundManager.Instance.SetBgm(BGMSound.None, 0.5f);
         yield return new WaitForSeconds(1f);
         light2.GetComponent<AudioSource>().Play();
         light.intensity = 0.1f;

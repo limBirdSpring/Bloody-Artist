@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 
-public class BloodManager : SingleTon<BloodManager>, ISavable
+public class BloodManager : SingleTon<BloodManager>
 {
     //피에 관련된 것들 진행
 
@@ -61,13 +62,6 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
     //---------------------------------------------------
 
 
-    public void OnSave()
-    {
-        DataManager.Instance.data += JsonUtility.ToJson(hurtPercent);
-        DataManager.Instance.data += JsonUtility.ToJson(tiredPercent);
-        DataManager.Instance.data += JsonUtility.ToJson(curBloodColor);
-    }
-
 
     private void Start()
     {
@@ -86,7 +80,7 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
         tiredPercent = Mathf.Clamp(tiredPercent + tired, 0, 100);
         float goal = 0.01f * tiredPercent;
 
-        GameManager.Instance.Blind(goal);
+        GameManager.Instance.Blind(goal * 100 + 1);
 
         Debug.Log(tiredPercent);
 
@@ -100,7 +94,7 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
         tiredPercent = Mathf.Clamp(tiredPercent-tired, 0, 100);
         float goal = 0.01f * tiredPercent;
 
-        GameManager.Instance.Blind(goal);
+        GameManager.Instance.Blind(goal * 100 + 1);
 
         Debug.Log(tiredPercent);
 
@@ -200,6 +194,9 @@ public class BloodManager : SingleTon<BloodManager>, ISavable
         tiredPercent = 0;
         hurtSlide.fillAmount = 0.4f;
         tiredSlide.fillAmount = 0f;
+        UpdateHurtText();
+        GameManager.Instance.tiredBlur.focalLength.value = 1 ;
+
     }
 
     //==========================================================

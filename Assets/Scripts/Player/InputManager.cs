@@ -32,7 +32,7 @@ public struct StateMachine
     public State state;
 }
 
-public class InputManager : SingleTon<InputManager>, ISavable
+public class InputManager : SingleTon<InputManager>
 {
     [SerializeField]
     public List<StateMachine> allState = new List<StateMachine>();
@@ -40,15 +40,11 @@ public class InputManager : SingleTon<InputManager>, ISavable
     private State curState;
 
 
-    public void OnSave()
-    {
-        DataManager.Instance.data = JsonUtility.ToJson(transform.position);
-    }
 
     private void Start()
     {
-        curState = allState[0].state;
-        //ChangeState(StateName.Block);
+        //curState = allState[0].state;
+        ChangeState(StateName.Block);
     }
 
     private void Update()
